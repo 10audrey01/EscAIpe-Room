@@ -4,14 +4,18 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"
-  xmlns="http://javafx.com/javafx/18"
-  xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ChatController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="416.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ChatController">
   <children>
-    <TextArea fx:id="chatTextArea" layoutX="35.0" layoutY="26.0" prefHeight="299.0" prefWidth="538.0" wrapText="true" />
-    <TextField fx:id="inputText" layoutX="35.0" layoutY="341.0" prefHeight="26.0" prefWidth="435.0" />
-    <Button fx:id="sendButton" layoutX="505.0" layoutY="342.0" mnemonicParsing="false" onAction="#onSendMessage" text="Send" />
-    <Button layoutX="505.0" layoutY="367.0" mnemonicParsing="false" onAction="#onGoBack" text="Go Back" />
+    <TextArea fx:id="chatTextArea" layoutX="34.0" layoutY="39.0" prefHeight="220.0" prefWidth="532.0" wrapText="true" />
+    <TextField fx:id="inputText" layoutX="34.0" layoutY="284.0" prefHeight="26.0" prefWidth="435.0" />
+    <Button fx:id="sendButton" layoutX="517.0" layoutY="268.0" mnemonicParsing="false" onAction="#onSendMessage" text="Send" />
+    <Button fx:id="goBackButton" layoutX="507.0" layoutY="299.0" mnemonicParsing="false" onAction="#onGoBack" text="Go Back" />
+      <TextArea fx:id="dialogueTextArea" layoutX="56.0" layoutY="347.0" prefHeight="10.0" prefWidth="488.0" text="Flipping through the pages of the book...">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextArea>
   </children>
 </AnchorPane>

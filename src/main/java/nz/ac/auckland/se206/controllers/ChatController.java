@@ -33,12 +33,13 @@ public class ChatController {
    */
   @FXML
   public void initialize() throws ApiProxyException {
-    chatTextArea.setEditable(false);
+
     Task<Void> initializeTask =
         new Task<Void>() {
 
           @Override
           protected Void call() throws Exception {
+
             chatCompletionRequest =
                 new ChatCompletionRequest()
                     .setN(1)
@@ -49,6 +50,11 @@ public class ChatController {
             return null;
           }
         };
+
+    initializeTask.setOnRunning(
+        e -> {
+          dialogueTextArea.setText("Flipping through the pages . . .");
+        });
 
     initializeTask.setOnSucceeded(
         e -> {
@@ -102,6 +108,7 @@ public class ChatController {
    */
   @FXML
   private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
+    dialogueTextArea.setText("Looks like the book is checking if you are worthy . . .");
     String message = inputText.getText();
     sendButton.setDisable(true);
     goBackButton.setDisable(true);
@@ -122,12 +129,9 @@ public class ChatController {
             ChatMessage msg = new ChatMessage("user", message);
             appendChatMessage(msg);
             ChatMessage lastMsg = runGpt(msg);
-            System.out.println(lastMsg.getRole());
-            System.out.println(lastMsg.getContent());
             if (lastMsg.getRole().equals("assistant")
                 && lastMsg.getContent().startsWith("Correct")) {
               GameState.isRiddleResolved = true;
-              System.out.println("Riddle resolved");
             }
             return null;
           }
@@ -137,6 +141,12 @@ public class ChatController {
         e -> {
           sendButton.setDisable(false);
           goBackButton.setDisable(false);
+
+          if (GameState.isRiddleResolved) {
+            dialogueTextArea.setText("You are worthy!");
+          } else {
+            dialogueTextArea.setText("You are not worthy, try again!");
+          }
         });
 
     onSendMessageTask.setOnFailed(

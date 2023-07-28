@@ -19,8 +19,10 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 /** Controller class for the chat view. */
 public class ChatController {
   @FXML private TextArea chatTextArea;
+  @FXML private TextArea dialogueTextArea;
   @FXML private TextField inputText;
   @FXML private Button sendButton;
+  @FXML private Button goBackButton;
 
   private ChatCompletionRequest chatCompletionRequest;
 
@@ -31,6 +33,7 @@ public class ChatController {
    */
   @FXML
   public void initialize() throws ApiProxyException {
+    chatTextArea.setEditable(false);
     Task<Void> initializeTask =
         new Task<Void>() {
 
@@ -46,6 +49,12 @@ public class ChatController {
             return null;
           }
         };
+
+    initializeTask.setOnSucceeded(
+        e -> {
+          dialogueTextArea.setText("You found a riddle!");
+        });
+
     Thread initializeThread = new Thread(initializeTask, "initializeThread");
     initializeThread.start();
   }
@@ -65,9 +74,12 @@ public class ChatController {
    * @param msg the chat message to process
    * @return the response chat message
    * @throws ApiProxyException if there is an error communicating with the API proxy
+   * @throws InterruptedException
    */
   private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
+
     chatCompletionRequest.addMessage(msg);
+
     try {
       ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
       Choice result = chatCompletionResult.getChoices().iterator().next();
@@ -91,8 +103,12 @@ public class ChatController {
   @FXML
   private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
     String message = inputText.getText();
+    sendButton.setDisable(true);
+    goBackButton.setDisable(true);
 
     if (message.trim().isEmpty()) {
+      sendButton.setDisable(false);
+      goBackButton.setDisable(false);
       return;
     }
 
@@ -106,13 +122,29 @@ public class ChatController {
             ChatMessage msg = new ChatMessage("user", message);
             appendChatMessage(msg);
             ChatMessage lastMsg = runGpt(msg);
+            System.out.println(lastMsg.getRole());
+            System.out.println(lastMsg.getContent());
             if (lastMsg.getRole().equals("assistant")
                 && lastMsg.getContent().startsWith("Correct")) {
               GameState.isRiddleResolved = true;
+              System.out.println("Riddle resolved");
             }
             return null;
           }
         };
+
+    onSendMessageTask.setOnSucceeded(
+        e -> {
+          sendButton.setDisable(false);
+          goBackButton.setDisable(false);
+        });
+
+    onSendMessageTask.setOnFailed(
+        e -> {
+          sendButton.setDisable(false);
+          goBackButton.setDisable(false);
+        });
+
     Thread onSendMessageThread = new Thread(onSendMessageTask, "onSendMessageThread");
     onSendMessageThread.start();
   }

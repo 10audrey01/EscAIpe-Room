@@ -19,7 +19,6 @@ import nz.ac.auckland.se206.SceneManager.AppUi;
 public class App extends Application {
 
   private static Scene scene;
-
   private MediaPlayer player;
 
   public static void main(final String[] args) {

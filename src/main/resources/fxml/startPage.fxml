@@ -12,12 +12,12 @@
             <Font size="48.0" />
          </font>
       </Label>
-      <Button fx:id="playButton" layoutX="241.0" layoutY="235.0" mnemonicParsing="false" onAction="#clickPlayButton" prefHeight="39.0" prefWidth="134.0" text="Play">
+      <Button fx:id="playButton" layoutX="241.0" layoutY="235.0" mnemonicParsing="false" onAction="#onClickPlayButton" prefHeight="39.0" prefWidth="134.0" text="Play">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="settingsButton" layoutX="241.0" layoutY="302.0" mnemonicParsing="false" onAction="#clickSettingsButton" prefHeight="39.0" prefWidth="134.0" text="Settings">
+      <Button fx:id="settingsButton" layoutX="241.0" layoutY="302.0" mnemonicParsing="false" onAction="#onClickSettingsButton" prefHeight="39.0" prefWidth="134.0" text="Settings">
          <font>
             <Font size="20.0" />
          </font>

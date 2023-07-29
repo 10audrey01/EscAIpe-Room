@@ -110,9 +110,8 @@ public class ChatController {
    */
   @FXML
   private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
-    dialogueTextArea.setText(
-        "Looks like the book is checking if you are worthy . . ."); // let user know checking if
-                                                                    // there answer is right
+    // let user know checking if there answer is right
+    dialogueTextArea.setText("Looks like the book is checking if you are worthy . . .");
     String message = inputText.getText();
     sendButton.setDisable(true); // disable send button while processing message
     goBackButton.setDisable(true);
@@ -133,11 +132,8 @@ public class ChatController {
             ChatMessage msg = new ChatMessage("user", message);
             appendChatMessage(msg);
             ChatMessage lastMsg = runGpt(msg);
-            if (lastMsg
-                    .getRole()
-                    .equals(
-                        "assistant") // if the last message is from the assistant and starts with
-                                     // "Correct"
+            // if the last message is from the assistant and starts with "Correct"
+            if (lastMsg.getRole().equals("assistant")
                 && lastMsg.getContent().startsWith("Correct")) {
               GameState.isRiddleResolved = true;
             }

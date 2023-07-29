@@ -14,12 +14,12 @@ public class StartPageController {
   @FXML private Button settingsButton;
 
   @FXML
-  private void playGame(ActionEvent event) throws IOException {
+  private void clickPlayButton(ActionEvent event) throws IOException {
     App.setRoot("room");
   }
 
   @FXML
-  private void openSettings(ActionEvent event) throws IOException {
+  private void clickSettingsButton(ActionEvent event) throws IOException {
 
     SettingsPageController controller =
         (SettingsPageController) SceneManager.getController(AppUi.SETTINGS_PAGE);

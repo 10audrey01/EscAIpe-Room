@@ -17,7 +17,7 @@ public class SettingsPageController {
   }
 
   @FXML
-  public void onGoBackFromSettings(ActionEvent event) {
+  private void onGoBackFromSettings(ActionEvent event) {
     App.setUi(previousScene);
   }
 }

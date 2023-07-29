@@ -40,6 +40,7 @@ public class ChatController {
           @Override
           protected Void call() throws Exception {
 
+            // Edit AI behaviour here (temperature, topP, maxTokens)
             chatCompletionRequest =
                 new ChatCompletionRequest()
                     .setN(1)
@@ -53,12 +54,13 @@ public class ChatController {
 
     initializeTask.setOnRunning(
         e -> {
-          dialogueTextArea.setText("Flipping through the pages . . .");
+          dialogueTextArea.setText(
+              "Flipping through the pages . . ."); // let user know riddle is loading
         });
 
     initializeTask.setOnSucceeded(
         e -> {
-          dialogueTextArea.setText("You found a riddle!");
+          dialogueTextArea.setText("You found a riddle!"); // let user know riddle is loaded
         });
 
     Thread initializeThread = new Thread(initializeTask, "initializeThread");
@@ -108,12 +110,14 @@ public class ChatController {
    */
   @FXML
   private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
-    dialogueTextArea.setText("Looks like the book is checking if you are worthy . . .");
+    dialogueTextArea.setText(
+        "Looks like the book is checking if you are worthy . . ."); // let user know checking if
+                                                                    // there answer is right
     String message = inputText.getText();
-    sendButton.setDisable(true);
+    sendButton.setDisable(true); // disable send button while processing message
     goBackButton.setDisable(true);
 
-    if (message.trim().isEmpty()) {
+    if (message.trim().isEmpty()) { // if user sends empty message, do nothing
       sendButton.setDisable(false);
       goBackButton.setDisable(false);
       return;
@@ -129,7 +133,11 @@ public class ChatController {
             ChatMessage msg = new ChatMessage("user", message);
             appendChatMessage(msg);
             ChatMessage lastMsg = runGpt(msg);
-            if (lastMsg.getRole().equals("assistant")
+            if (lastMsg
+                    .getRole()
+                    .equals(
+                        "assistant") // if the last message is from the assistant and starts with
+                                     // "Correct"
                 && lastMsg.getContent().startsWith("Correct")) {
               GameState.isRiddleResolved = true;
             }
@@ -143,9 +151,10 @@ public class ChatController {
           goBackButton.setDisable(false);
 
           if (GameState.isRiddleResolved) {
-            dialogueTextArea.setText("You are worthy!");
+            dialogueTextArea.setText("You are worthy!"); // riddle is solved
           } else {
-            dialogueTextArea.setText("You are not worthy, try again!");
+            dialogueTextArea.setText(
+                "You are not worthy, try again!"); // riddle is not solved, try again
           }
         });
 

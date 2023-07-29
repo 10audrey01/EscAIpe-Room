@@ -19,7 +19,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <CheckBox layoutX="134.0" layoutY="356.0" mnemonicParsing="false" text="Text-to-speech">
+      <CheckBox layoutX="134.0" layoutY="356.0" mnemonicParsing="false" selected="true" text="Text-to-speech">
          <font>
             <Font size="20.0" />
          </font>
@@ -29,8 +29,8 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Slider blockIncrement="5.0" layoutX="280.0" layoutY="181.0" majorTickUnit="5.0" minorTickCount="5" prefHeight="18.0" prefWidth="231.0" showTickMarks="true" snapToTicks="true" />
-      <Slider blockIncrement="5.0" layoutX="280.0" layoutY="274.0" majorTickUnit="5.0" minorTickCount="5" prefHeight="18.0" prefWidth="231.0" showTickMarks="true" snapToTicks="true" />
+      <Slider fx:id="musicVolumeSlider" blockIncrement="5.0" layoutX="280.0" layoutY="181.0" majorTickUnit="5.0" minorTickCount="5" onDragDetected="#onDragDetected" prefHeight="18.0" prefWidth="231.0" snapToTicks="true" value="100.0" />
+      <Slider blockIncrement="5.0" layoutX="280.0" layoutY="274.0" majorTickUnit="5.0" minorTickCount="5" prefHeight="18.0" prefWidth="231.0" snapToTicks="true" />
       <Button fx:id="settingsGoBackButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onGoBackFromSettings" text="Go back" />
    </children>
 </AnchorPane>

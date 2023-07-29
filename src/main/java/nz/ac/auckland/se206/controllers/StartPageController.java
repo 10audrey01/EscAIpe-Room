@@ -12,6 +12,7 @@ public class StartPageController {
 
   @FXML private Button playButton;
   @FXML private Button settingsButton;
+  @FXML private Button exitButton;
 
   @FXML
   private void onClickPlayButton(ActionEvent event) throws IOException {
@@ -26,5 +27,10 @@ public class StartPageController {
     controller.setPreviousUi(AppUi.START_PAGE);
 
     App.setUi(AppUi.SETTINGS_PAGE);
+  }
+
+  @FXML
+  private void onClickExitButton(ActionEvent event) {
+    System.exit(0);
   }
 }

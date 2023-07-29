@@ -19,7 +19,7 @@ import nz.ac.auckland.se206.SceneManager.AppUi;
 public class App extends Application {
 
   private static Scene scene;
-  private MediaPlayer player;
+  private static MediaPlayer musicPlayer;
 
   public static void main(final String[] args) {
     launch();
@@ -61,17 +61,21 @@ public class App extends Application {
     SceneManager.addController(AppUi.SETTINGS_PAGE, loader.getController());
 
     Media mainMusic = new Media(App.class.getResource("/sounds/mainMusic.mp3").toURI().toString());
-    player = new MediaPlayer(mainMusic);
-    player.setOnEndOfMedia(
+    musicPlayer = new MediaPlayer(mainMusic);
+    musicPlayer.setOnEndOfMedia(
         new Runnable() {
           public void run() {
-            player.seek(Duration.ZERO);
+            musicPlayer.seek(Duration.ZERO);
           }
         });
-    player.play();
+    musicPlayer.play();
 
     scene = new Scene(SceneManager.getUiRoot(AppUi.START_PAGE), 600, 470);
     stage.setScene(scene);
     stage.show();
+  }
+
+  public static MediaPlayer getMusicPlayer() {
+    return musicPlayer;
   }
 }

@@ -1,11 +1,15 @@
 package nz.ac.auckland.se206;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 
 /**
@@ -15,6 +19,8 @@ import nz.ac.auckland.se206.SceneManager.AppUi;
 public class App extends Application {
 
   private static Scene scene;
+
+  private MediaPlayer player;
 
   public static void main(final String[] args) {
     launch();
@@ -45,14 +51,25 @@ public class App extends Application {
    *
    * @param stage The primary stage of the application.
    * @throws IOException If "src/main/resources/fxml/canvas.fxml" is not found.
+   * @throws URISyntaxException
    */
   @Override
-  public void start(final Stage stage) throws IOException {
+  public void start(final Stage stage) throws IOException, URISyntaxException {
     SceneManager.addUi(AppUi.START_PAGE, loadFxml("startPage"));
 
     FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/settingsPage.fxml"));
     SceneManager.addUi(AppUi.SETTINGS_PAGE, loader.load());
     SceneManager.addController(AppUi.SETTINGS_PAGE, loader.getController());
+
+    Media mainMusic = new Media(App.class.getResource("/sounds/mainMusic.mp3").toURI().toString());
+    player = new MediaPlayer(mainMusic);
+    player.setOnEndOfMedia(
+        new Runnable() {
+          public void run() {
+            player.seek(Duration.ZERO);
+          }
+        });
+    player.play();
 
     scene = new Scene(SceneManager.getUiRoot(AppUi.START_PAGE), 600, 470);
     stage.setScene(scene);

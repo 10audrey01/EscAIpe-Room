@@ -8,7 +8,10 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.SettingsPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+   prefHeight="470.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1"
+   xmlns:fx="http://javafx.com/fxml/1"
+   fx:controller="nz.ac.auckland.se206.controllers.SettingsPageController">
    <children>
       <Label layoutX="225.0" layoutY="55.0" text="Settings">
          <font>
@@ -30,8 +33,13 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Slider blockIncrement="5.0" layoutX="280.0" layoutY="181.0" majorTickUnit="5.0" minorTickCount="5" prefHeight="18.0" prefWidth="231.0" showTickMarks="true" snapToTicks="true" />
-      <Slider blockIncrement="5.0" layoutX="280.0" layoutY="274.0" majorTickUnit="5.0" minorTickCount="5" prefHeight="18.0" prefWidth="231.0" showTickMarks="true" snapToTicks="true" />
-      <Button fx:id="settingsGoBackButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onGoBackFromSettings" text="Go back" />
+      <Slider blockIncrement="5.0" layoutX="280.0" layoutY="181.0" majorTickUnit="5.0"
+         minorTickCount="5" prefHeight="18.0" prefWidth="231.0" showTickMarks="true"
+         snapToTicks="true" />
+      <Slider blockIncrement="5.0" layoutX="280.0" layoutY="274.0" majorTickUnit="5.0"
+         minorTickCount="5" prefHeight="18.0" prefWidth="231.0" showTickMarks="true"
+         snapToTicks="true" />
+      <Button fx:id="settingsGoBackButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false"
+         onAction="#onGoBackFromSettings" text="Go back" />
    </children>
 </AnchorPane>

@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import nz.ac.auckland.se206.SceneManager.AppUi;
 
 /**
  * This is the entry point of the JavaFX application, while you can change this class, it should
@@ -23,6 +24,10 @@ public class App extends Application {
     scene.setRoot(loadFxml(fxml));
   }
 
+  public static void setUi(AppUi newUi) {
+    scene.setRoot(SceneManager.getUiRoot(newUi));
+  }
+
   /**
    * Returns the node associated to the input file. The method expects that the file is located in
    * "src/main/resources/fxml".
@@ -31,7 +36,7 @@ public class App extends Application {
    * @return The node of the input file.
    * @throws IOException If the file is not found.
    */
-  private static Parent loadFxml(final String fxml) throws IOException {
+  public static Parent loadFxml(final String fxml) throws IOException {
     return new FXMLLoader(App.class.getResource("/fxml/" + fxml + ".fxml")).load();
   }
 
@@ -43,10 +48,11 @@ public class App extends Application {
    */
   @Override
   public void start(final Stage stage) throws IOException {
-    Parent root = loadFxml("startPage");
-    scene = new Scene(root, 600, 470);
+    SceneManager.addUi(AppUi.START_PAGE, loadFxml("startPage"));
+    SceneManager.addUi(AppUi.SETTINGS_PAGE, loadFxml("settingsPage"));
+
+    scene = new Scene(SceneManager.getUiRoot(AppUi.START_PAGE), 600, 470);
     stage.setScene(scene);
     stage.show();
-    root.requestFocus();
   }
 }

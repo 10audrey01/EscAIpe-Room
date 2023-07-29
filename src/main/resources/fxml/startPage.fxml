@@ -5,19 +5,25 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.StartPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+   prefHeight="470.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1"
+   xmlns:fx="http://javafx.com/fxml/1"
+   fx:controller="nz.ac.auckland.se206.controllers.StartPageController">
    <children>
-      <Label alignment="CENTER" layoutX="90.0" layoutY="80.0" prefHeight="109.0" prefWidth="436.0" text="Game name">
+      <Label alignment="CENTER" layoutX="90.0" layoutY="80.0" prefHeight="109.0" prefWidth="436.0"
+         text="Game name">
          <font>
             <Font size="48.0" />
          </font>
       </Label>
-      <Button fx:id="playButton" layoutX="241.0" layoutY="235.0" mnemonicParsing="false" onAction="#playGame" prefHeight="39.0" prefWidth="134.0" text="Play">
+      <Button fx:id="playButton" layoutX="241.0" layoutY="235.0" mnemonicParsing="false"
+         onAction="#playGame" prefHeight="39.0" prefWidth="134.0" text="Play">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="settingsButton" layoutX="241.0" layoutY="302.0" mnemonicParsing="false" onAction="#openSettings" prefHeight="39.0" prefWidth="134.0" text="Settings">
+      <Button fx:id="settingsButton" layoutX="241.0" layoutY="302.0" mnemonicParsing="false"
+         onAction="#openSettings" prefHeight="39.0" prefWidth="134.0" text="Settings">
          <font>
             <Font size="20.0" />
          </font>

@@ -12,10 +12,10 @@
     <TextField fx:id="inputText" layoutX="11.0" layoutY="294.0" prefHeight="42.0" prefWidth="483.0" />
     <Button fx:id="sendButton" layoutX="517.0" layoutY="284.0" mnemonicParsing="false" onAction="#onSendMessage" text="Send" />
     <Button fx:id="goBackButton" layoutX="507.0" layoutY="315.0" mnemonicParsing="false" onAction="#onGoBack" text="Go Back" />
-      <TextArea fx:id="dialogueTextArea" editable="false" layoutX="10.0" layoutY="360.0" prefHeight="96.0" prefWidth="580.0">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </TextArea>
+    <TextArea fx:id="dialogueTextArea" editable="false" layoutX="10.0" layoutY="360.0" prefHeight="96.0" prefWidth="580.0">
+      <font>
+        <Font size="20.0" />
+      </font>
+    </TextArea>
   </children>
 </AnchorPane>

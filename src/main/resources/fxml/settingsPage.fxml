@@ -7,30 +7,33 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.SettingsPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="970.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.SettingsPageController">
    <children>
-      <Label layoutX="225.0" layoutY="55.0" text="Settings">
+      <Label layoutX="371.0" layoutY="91.0" text="Settings">
          <font>
-            <Font size="42.0" />
+            <Font size="64.0" />
          </font>
       </Label>
-      <Label layoutX="93.0" layoutY="175.0" text="Music Volume">
+      <Label layoutX="161.0" layoutY="291.0" text="Music Volume">
          <font>
-            <Font size="20.0" />
+            <Font size="30.0" />
          </font>
       </Label>
-      <CheckBox layoutX="134.0" layoutY="356.0" mnemonicParsing="false" selected="true" text="Text-to-speech">
+      <CheckBox layoutX="222.0" layoutY="617.0" mnemonicParsing="false" selected="true" text="Text-to-speech">
          <font>
-            <Font size="20.0" />
+            <Font size="30.0" />
          </font>
       </CheckBox>
-      <Label layoutX="59.0" layoutY="268.0" text="Sound Effects Volume">
+      <Label layoutX="110.0" layoutY="451.0" text="Sound Effects Volume">
          <font>
-            <Font size="20.0" />
+            <Font size="30.0" />
          </font>
       </Label>
-      <Slider fx:id="musicVolumeSlider" blockIncrement="5.0" layoutX="280.0" layoutY="181.0" majorTickUnit="5.0" minorTickCount="5" onDragDetected="#onDragDetected" prefHeight="18.0" prefWidth="231.0" snapToTicks="true" value="100.0" />
-      <Slider blockIncrement="5.0" layoutX="280.0" layoutY="274.0" majorTickUnit="5.0" minorTickCount="5" prefHeight="18.0" prefWidth="231.0" snapToTicks="true" />
-      <Button fx:id="settingsGoBackButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onGoBackFromSettings" text="Go back" />
+      <Slider fx:id="musicVolumeSlider" blockIncrement="5.0" layoutX="417.0" layoutY="305.0" majorTickUnit="5.0" minorTickCount="5" onDragDetected="#onDragDetected" prefHeight="18.0" prefWidth="364.0" snapToTicks="true" value="100.0" />
+      <Slider blockIncrement="5.0" layoutX="417.0" layoutY="465.0" majorTickUnit="5.0" minorTickCount="5" prefHeight="18.0" prefWidth="364.0" snapToTicks="true" value="100.0" />
+      <Button fx:id="settingsGoBackButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onGoBackFromSettings" text="Go back">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
    </children>
 </AnchorPane>

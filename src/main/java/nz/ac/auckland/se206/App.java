@@ -72,7 +72,7 @@ public class App extends Application {
         });
     musicPlayer.play();
 
-    scene = new Scene(SceneManager.getUiRoot(AppUi.START_PAGE), 600, 470);
+    scene = new Scene(SceneManager.getUiRoot(AppUi.START_PAGE), 970, 790);
     stage.setScene(scene);
     stage.show();
   }

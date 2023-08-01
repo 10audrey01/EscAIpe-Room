@@ -16,7 +16,7 @@ public class StartPageController {
 
   @FXML
   private void onClickPlayButton(ActionEvent event) throws IOException {
-    App.setRoot("room");
+    App.setRoot("lightRoom");
   }
 
   @FXML

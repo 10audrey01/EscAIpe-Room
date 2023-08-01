@@ -5,6 +5,7 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import nz.ac.auckland.se206.App;
@@ -19,8 +20,8 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 /** Controller class for the chat view. */
 public class ChatController {
   @FXML private TextArea chatTextArea;
-  @FXML private TextArea dialogueTextArea;
   @FXML private TextField inputText;
+  @FXML private Label chatDialogueLabel;
   @FXML private Button sendButton;
   @FXML private Button goBackButton;
 
@@ -54,13 +55,13 @@ public class ChatController {
 
     initializeTask.setOnRunning(
         e -> {
-          dialogueTextArea.setText(
+          chatDialogueLabel.setText(
               "Flipping through the pages . . ."); // let user know riddle is loading
         });
 
     initializeTask.setOnSucceeded(
         e -> {
-          dialogueTextArea.setText("You found a riddle!"); // let user know riddle is loaded
+          chatDialogueLabel.setText("You found a riddle!"); // let user know riddle is loaded
         });
 
     Thread initializeThread = new Thread(initializeTask, "initializeThread");
@@ -111,7 +112,7 @@ public class ChatController {
   @FXML
   private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
     // let user know checking if there answer is right
-    dialogueTextArea.setText("Looks like the book is checking if you are worthy . . .");
+    chatDialogueLabel.setText("Looks like the book is checking if you are worthy . . .");
     String message = inputText.getText();
     sendButton.setDisable(true); // disable send button while processing message
     goBackButton.setDisable(true);
@@ -147,9 +148,9 @@ public class ChatController {
           goBackButton.setDisable(false);
 
           if (GameState.isRiddleResolved) {
-            dialogueTextArea.setText("You are worthy!"); // riddle is solved
+            chatDialogueLabel.setText("You are worthy!"); // riddle is solved
           } else {
-            dialogueTextArea.setText(
+            chatDialogueLabel.setText(
                 "You are not worthy, try again!"); // riddle is not solved, try again
           }
         });
@@ -173,6 +174,6 @@ public class ChatController {
    */
   @FXML
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
-    App.setRoot("room");
+    App.setRoot("darkRoom");
   }
 }

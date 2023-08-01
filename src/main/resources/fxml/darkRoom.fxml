@@ -3,6 +3,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
 
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.DarkRoomController">
@@ -12,5 +13,6 @@
             <Image url="@../images/darkRoom.png" />
          </image>
       </ImageView>
+      <Rectangle fx:id="riddleBook" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="22.0" layoutX="119.0" layoutY="239.0" onMouseReleased="#onClickBook" opacity="0.0" stroke="BLACK" strokeType="OUTSIDE" width="9.0" />
    </children>
 </Pane>

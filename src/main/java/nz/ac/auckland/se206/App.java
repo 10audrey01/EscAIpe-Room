@@ -60,6 +60,8 @@ public class App extends Application {
     SceneManager.addUi(AppUi.SETTINGS_PAGE, loader.load());
     SceneManager.addController(AppUi.SETTINGS_PAGE, loader.getController());
 
+    SceneManager.addUi(AppUi.CHAT, loadFxml("chat"));
+
     Media mainMusic = new Media(App.class.getResource("/sounds/mainMusic.mp3").toURI().toString());
     musicPlayer = new MediaPlayer(mainMusic);
     musicPlayer.setOnEndOfMedia(

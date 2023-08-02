@@ -1,10 +1,13 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
@@ -13,6 +16,7 @@ public class LightRoomController {
 
   @FXML private Rectangle window;
   @FXML private Rectangle vinyl;
+  @FXML private Rectangle vinylPlayer;
   @FXML private Pane gameDialogue;
   @FXML private Pane gameDialogueYesNo;
   @FXML private Label itemLabel;
@@ -23,10 +27,11 @@ public class LightRoomController {
 
   private enum Item {
     WINDOW,
-    VINYL
+    VINYL_PLAYER
   }
 
   private Item currentItem;
+  private MediaPlayer vinylMediaPlayer;
 
   @FXML
   private void onClickWindow() {
@@ -38,7 +43,6 @@ public class LightRoomController {
   @FXML
   private void onClickVinyl() {
     if (GameState.isRiddleResolved && !GameState.isVinylFound) {
-      currentItem = Item.VINYL;
       itemLabel.setText("   You collected a vinyl!");
       GameState.isVinylFound = true;
       gameDialogue.setVisible(true);
@@ -46,15 +50,42 @@ public class LightRoomController {
   }
 
   @FXML
-  private void onClickYes() throws IOException {
+  private void onClickVinylPlayer() {
+    if (GameState.isVinylFound) {
+      currentItem = Item.VINYL_PLAYER;
+      itemLabelYesNo.setText("   Play the vinyl?");
+      gameDialogueYesNo.setVisible(true);
+    }
+
+    if (vinylMediaPlayer != null) {
+      currentItem = Item.VINYL_PLAYER;
+      itemLabelYesNo.setText("   Stop the vinyl player?");
+      gameDialogueYesNo.setVisible(true);
+    }
+  }
+
+  @FXML
+  private void onClickYes() throws IOException, URISyntaxException {
     switch (currentItem) {
       case WINDOW:
         gameDialogueYesNo.setVisible(false);
         App.setRoot("darkRoom");
         break;
-      case VINYL:
-        System.out.println("Play vinyl");
-        break;
+      case VINYL_PLAYER:
+        if (vinylMediaPlayer != null) {
+          gameDialogueYesNo.setVisible(false);
+          vinylMediaPlayer.stop();
+          vinylMediaPlayer = null;
+        } else {
+
+          gameDialogueYesNo.setVisible(false);
+          Media vinylSong =
+              new Media(App.class.getResource("/sounds/vinylSong.mp3").toURI().toString());
+          vinylMediaPlayer = new MediaPlayer(vinylSong);
+          App.getMusicPlayer().stop();
+          vinylMediaPlayer.play();
+          break;
+        }
     }
   }
 

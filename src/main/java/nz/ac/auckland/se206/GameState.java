@@ -8,4 +8,7 @@ public class GameState {
 
   /** Indicates whether the key has been found. */
   public static boolean isKeyFound = false;
+
+  /** Indicates whether the vinyl has been found. */
+  public static boolean isVinylFound = false;
 }

@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.GameState;
 
 public class LightRoomController {
 
@@ -36,11 +37,12 @@ public class LightRoomController {
 
   @FXML
   private void onClickVinyl() {
-    // if (GameState.isRiddleResolved) {
-    currentItem = Item.VINYL;
-    itemLabel.setText("   You collected a vinyl!");
-    gameDialogue.setVisible(true);
-    //  }
+    if (GameState.isRiddleResolved && !GameState.isVinylFound) {
+      currentItem = Item.VINYL;
+      itemLabel.setText("   You collected a vinyl!");
+      GameState.isVinylFound = true;
+      gameDialogue.setVisible(true);
+    }
   }
 
   @FXML

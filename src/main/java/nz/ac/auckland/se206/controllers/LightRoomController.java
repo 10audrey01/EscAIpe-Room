@@ -14,9 +14,11 @@ import nz.ac.auckland.se206.GameState;
 
 public class LightRoomController {
 
+  @FXML private Rectangle door;
   @FXML private Rectangle window;
   @FXML private Rectangle vinyl;
   @FXML private Rectangle vinylPlayer;
+  @FXML private Rectangle guitar;
   @FXML private Pane gameDialogue;
   @FXML private Pane gameDialogueYesNo;
   @FXML private Label itemLabel;
@@ -32,6 +34,17 @@ public class LightRoomController {
 
   private Item currentItem;
   private MediaPlayer vinylMediaPlayer;
+
+  @FXML
+  private void onClickDoor() {
+    if (GameState.isKeyFound) {
+      // App.setUi(AppUi.WIN);
+      System.out.println("You win!");
+    } else {
+      itemLabel.setText("   The door is locked!");
+      gameDialogue.setVisible(true);
+    }
+  }
 
   @FXML
   private void onClickWindow() {
@@ -65,6 +78,15 @@ public class LightRoomController {
   }
 
   @FXML
+  private void onClickGuitar() {
+    if (GameState.isVinylPlayed) {
+      itemLabel.setText("   You found a key!");
+      gameDialogue.setVisible(true);
+      GameState.isKeyFound = true;
+    }
+  }
+
+  @FXML
   private void onClickYes() throws IOException, URISyntaxException {
     switch (currentItem) {
       case WINDOW:
@@ -84,6 +106,7 @@ public class LightRoomController {
           vinylMediaPlayer = new MediaPlayer(vinylSong);
           App.getMusicPlayer().stop();
           vinylMediaPlayer.play();
+          GameState.isVinylPlayed = true;
           break;
         }
     }

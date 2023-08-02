@@ -11,24 +11,58 @@ import nz.ac.auckland.se206.App;
 public class LightRoomController {
 
   @FXML private Rectangle window;
+  @FXML private Rectangle vinyl;
   @FXML private Pane gameDialogue;
+  @FXML private Pane gameDialogueYesNo;
   @FXML private Label itemLabel;
+  @FXML private Label itemLabelYesNo;
   @FXML private Button yesButton;
   @FXML private Button noButton;
+  @FXML private Button okButton;
+
+  private enum Item {
+    WINDOW,
+    VINYL
+  }
+
+  private Item currentItem;
 
   @FXML
-  public void onClickWindow() {
-    itemLabel.setText("   Draw the blinds?");
+  private void onClickWindow() {
+    currentItem = Item.WINDOW;
+    itemLabelYesNo.setText("   Draw the blinds?");
+    gameDialogueYesNo.setVisible(true);
+  }
+
+  @FXML
+  private void onClickVinyl() {
+    // if (GameState.isRiddleResolved) {
+    currentItem = Item.VINYL;
+    itemLabel.setText("   You collected a vinyl!");
     gameDialogue.setVisible(true);
+    //  }
   }
 
   @FXML
-  public void onClickYes() throws IOException {
-    App.setRoot("darkRoom");
+  private void onClickYes() throws IOException {
+    switch (currentItem) {
+      case WINDOW:
+        gameDialogueYesNo.setVisible(false);
+        App.setRoot("darkRoom");
+        break;
+      case VINYL:
+        System.out.println("Play vinyl");
+        break;
+    }
   }
 
   @FXML
-  public void onClickNo() {
+  private void onClickNo() {
+    gameDialogueYesNo.setVisible(false);
+  }
+
+  @FXML
+  private void onClickOk() {
     gameDialogue.setVisible(false);
   }
 }

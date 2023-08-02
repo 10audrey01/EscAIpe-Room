@@ -58,7 +58,9 @@ public class App extends Application {
 
     FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/settingsPage.fxml"));
     SceneManager.addUi(AppUi.SETTINGS_PAGE, loader.load());
-    SceneManager.addController(AppUi.SETTINGS_PAGE, loader.getController());
+    SceneManager.addController(
+        AppUi.SETTINGS_PAGE,
+        loader.getController()); // add settings controller reference for future use
 
     SceneManager.addUi(AppUi.CHAT, loadFxml("chat"));
 

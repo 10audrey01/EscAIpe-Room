@@ -45,10 +45,10 @@ public class ChatController {
             chatCompletionRequest =
                 new ChatCompletionRequest()
                     .setN(1)
-                    .setTemperature(0.2)
-                    .setTopP(0.5)
+                    .setTemperature(0.8)
+                    .setTopP(0.8)
                     .setMaxTokens(100);
-            runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord("vase")));
+            runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord("vinyl")));
             return null;
           }
         };
@@ -86,7 +86,6 @@ public class ChatController {
    * @throws InterruptedException
    */
   private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
-
     chatCompletionRequest.addMessage(msg);
 
     try {

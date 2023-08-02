@@ -34,4 +34,8 @@ public class ChatMessage {
   public String getContent() {
     return content;
   }
+
+  public void setRole(String role) {
+    this.role = role;
+  }
 }

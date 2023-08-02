@@ -16,9 +16,9 @@
          </image>
       </ImageView>
       <Rectangle fx:id="window" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="79.0" layoutX="426.0" layoutY="65.0" onMouseReleased="#onClickWindow" opacity="0.0" stroke="BLACK" strokeType="OUTSIDE" width="131.0" />
-      <Pane fx:id="gameDialogue" layoutX="-3.0" layoutY="710.0" prefHeight="73.0" prefWidth="974.0" style="-fx-background-color: #ffff;" visible="false">
+      <Pane fx:id="gameDialogueYesNo" layoutX="-3.0" layoutY="710.0" prefHeight="73.0" prefWidth="974.0" style="-fx-background-color: #ffff;" visible="false">
          <children>
-            <Label fx:id="itemLabel" contentDisplay="TOP" layoutX="-3.0" layoutY="15.0" prefHeight="45.0" prefWidth="886.0" text="   Label">
+            <Label fx:id="itemLabelYesNo" contentDisplay="TOP" layoutX="-3.0" layoutY="15.0" prefHeight="45.0" prefWidth="886.0" text="   Label">
                <font>
                   <Font size="22.0" />
                </font>
@@ -33,7 +33,18 @@
                   <Font size="15.0" />
                </font>
             </Button>
+            <Pane fx:id="gameDialogue" layoutY="1.0" prefHeight="73.0" prefWidth="974.0" style="-fx-background-color: #ffff;" visible="false">
+               <children>
+                  <Label fx:id="itemLabel" contentDisplay="TOP" layoutX="-3.0" layoutY="15.0" prefHeight="45.0" prefWidth="886.0" text="   Label">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="okButton" layoutX="919.0" layoutY="21.0" mnemonicParsing="false" onAction="#onClickOk" text="OK" />
+               </children>
+            </Pane>
          </children>
       </Pane>
+      <Rectangle fx:id="vinyl" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="81.0" layoutX="207.0" layoutY="410.0" onMouseReleased="#onClickVinyl" opacity="0.0" stroke="BLACK" strokeType="OUTSIDE" width="89.0" />
    </children>
 </Pane>

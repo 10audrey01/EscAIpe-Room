@@ -14,31 +14,68 @@ public class DarkRoomController {
 
   @FXML private Rectangle riddleBook;
   @FXML private Rectangle window;
+  @FXML private Rectangle vinyl;
   @FXML private Pane gameDialogue;
+  @FXML private Pane gameDialogueYesNo;
   @FXML private Label itemLabel;
+  @FXML private Label itemLabelYesNo;
   @FXML private Button yesButton;
   @FXML private Button noButton;
+  @FXML private Button okButton;
+
+  private enum Item {
+    BOOK,
+    WINDOW,
+    VINYL
+  }
+
+  private Item currentItem;
 
   @FXML
-  public void onClickBook() {
+  private void onClickBook() {
     if (!GameState.isRiddleResolved) {
       App.setUi(AppUi.CHAT);
     }
   }
 
   @FXML
-  public void onClickWindow() {
-    itemLabel.setText("   Open the blinds?");
-    gameDialogue.setVisible(true);
+  private void onClickWindow() {
+    currentItem = Item.WINDOW;
+    itemLabelYesNo.setText("   Open the blinds?");
+    gameDialogueYesNo.setVisible(true);
   }
 
   @FXML
-  public void onClickYes() throws IOException {
-    App.setRoot("lightRoom");
+  private void onClickVinyl() {
+    if (GameState.isRiddleResolved) {
+      itemLabel.setText("   You can't see where the vinyl is in the dark!");
+      gameDialogue.setVisible(true);
+    }
+  }
+
+  @FXML
+  private void onClickYes() throws IOException {
+    switch (currentItem) {
+      case WINDOW:
+        gameDialogueYesNo.setVisible(false);
+        App.setRoot("lightRoom");
+        break;
+      case BOOK:
+        break;
+      case VINYL:
+        break;
+      default:
+        break;
+    }
   }
 
   @FXML
   public void onClickNo() {
+    gameDialogueYesNo.setVisible(false);
+  }
+
+  @FXML
+  public void onClickOk() {
     gameDialogue.setVisible(false);
   }
 }

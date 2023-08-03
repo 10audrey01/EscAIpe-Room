@@ -98,13 +98,14 @@ public class LightRoomController {
           gameDialogueYesNo.setVisible(false);
           vinylMediaPlayer.stop();
           vinylMediaPlayer = null;
+          StartPageController.getMusicPlayer().play();
         } else {
 
           gameDialogueYesNo.setVisible(false);
           Media vinylSong =
               new Media(App.class.getResource("/sounds/vinylSong.mp3").toURI().toString());
           vinylMediaPlayer = new MediaPlayer(vinylSong);
-          StartPageController.getMusicPlayer().stop();
+          StartPageController.getMusicPlayer().pause();
           vinylMediaPlayer.play();
           GameState.isVinylPlayed = true;
           break;

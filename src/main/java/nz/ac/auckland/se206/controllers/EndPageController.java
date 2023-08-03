@@ -15,7 +15,10 @@ public class EndPageController {
 
   @FXML
   public void initialize() {
-    LightRoomController.getVinylMediaPlayer().stop();
+    if (LightRoomController.getVinylMediaPlayer() != null) {
+      LightRoomController.getVinylMediaPlayer().stop();
+    }
+
     if (GameState.isEscaped) {
       endLabel.setText("You escaped the room!");
     } else {
@@ -25,6 +28,14 @@ public class EndPageController {
 
   @FXML
   public void onClickPlayAgain() throws IOException {
+    GameState.isRiddleResolved = false;
+    GameState.isKeyFound = false;
+    GameState.isVinylFound = false;
+    GameState.isVinylPlayed = false;
+    GameState.isEscaped = false;
+
+    StartPageController.getMusicPlayer().play();
+
     App.setRoot("lightRoom");
   }
 

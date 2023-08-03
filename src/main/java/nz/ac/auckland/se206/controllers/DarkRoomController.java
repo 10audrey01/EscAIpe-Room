@@ -32,9 +32,12 @@ public class DarkRoomController {
   private Item currentItem;
 
   @FXML
-  private void onClickBook() {
+  private void onClickBook() throws IOException {
     if (!GameState.isRiddleResolved) {
       App.setUi(AppUi.CHAT);
+    } else if (GameState.isRiddleResolved) {
+      itemLabel.setText("   You already solved the riddle! The answer was 'vinyl'.");
+      gameDialogue.setVisible(true);
     }
   }
 

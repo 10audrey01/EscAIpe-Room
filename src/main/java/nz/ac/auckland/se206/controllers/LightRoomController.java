@@ -91,6 +91,10 @@ public class LightRoomController {
     switch (currentItem) {
       case WINDOW:
         gameDialogueYesNo.setVisible(false);
+        MediaPlayer blindsPlayer =
+            new MediaPlayer(
+                new Media(getClass().getResource("/sounds/blinds.mp3").toURI().toString()));
+        blindsPlayer.play();
         App.setRoot("darkRoom");
         break;
       case VINYL_PLAYER:

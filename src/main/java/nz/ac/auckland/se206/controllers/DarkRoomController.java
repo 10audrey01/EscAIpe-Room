@@ -1,10 +1,13 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
@@ -23,17 +26,13 @@ public class DarkRoomController {
   @FXML private Button noButton;
   @FXML private Button okButton;
 
-  private enum Item {
-    BOOK,
-    WINDOW,
-    VINYL
-  }
-
-  private Item currentItem;
-
   @FXML
-  private void onClickBook() throws IOException {
+  private void onClickBook() throws IOException, URISyntaxException {
     if (!GameState.isRiddleResolved) {
+      MediaPlayer bookOpeningPlayer =
+          new MediaPlayer(
+              new Media(getClass().getResource("/sounds/bookOpening.mp3").toURI().toString()));
+      bookOpeningPlayer.play();
       App.setUi(AppUi.CHAT);
     } else if (GameState.isRiddleResolved) {
       itemLabel.setText("   You already solved the riddle! The answer was 'vinyl'.");
@@ -43,7 +42,6 @@ public class DarkRoomController {
 
   @FXML
   private void onClickWindow() {
-    currentItem = Item.WINDOW;
     itemLabelYesNo.setText("   Open the blinds?");
     gameDialogueYesNo.setVisible(true);
   }
@@ -57,19 +55,12 @@ public class DarkRoomController {
   }
 
   @FXML
-  private void onClickYes() throws IOException {
-    switch (currentItem) {
-      case WINDOW:
-        gameDialogueYesNo.setVisible(false);
-        App.setRoot("lightRoom");
-        break;
-      case BOOK:
-        break;
-      case VINYL:
-        break;
-      default:
-        break;
-    }
+  private void onClickYes() throws IOException, URISyntaxException {
+    gameDialogueYesNo.setVisible(false);
+    MediaPlayer blindsPlayer =
+        new MediaPlayer(new Media(getClass().getResource("/sounds/blinds.mp3").toURI().toString()));
+    blindsPlayer.play();
+    App.setRoot("lightRoom");
   }
 
   @FXML

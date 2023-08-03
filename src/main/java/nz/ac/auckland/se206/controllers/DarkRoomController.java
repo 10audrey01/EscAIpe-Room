@@ -49,7 +49,7 @@ public class DarkRoomController {
   @FXML
   private void onClickVinyl() {
     if (GameState.isRiddleResolved) {
-      itemLabel.setText("   You can't see where the vinyl is!");
+      itemLabel.setText("   You can't see where the vinyl is . . .");
       gameDialogue.setVisible(true);
     }
   }

@@ -10,7 +10,7 @@ public class GptPromptEngineering {
    * @return the generated prompt engineering string
    */
   public static String getRiddleWithGivenWord(String wordToGuess) {
-    return "You are a talking book of an escape room, tell me a riddle with"
+    return "You are a talking book of an escape room, tell me a difficult and long riddle with"
         + " answer "
         + wordToGuess
         + ". You should answer with the word Correct when is correct, if the user asks for hints"

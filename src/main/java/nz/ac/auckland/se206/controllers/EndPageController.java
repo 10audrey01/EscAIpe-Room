@@ -26,7 +26,7 @@ public class EndPageController {
     }
 
     if (GameState.isEscaped) {
-      endLabel.setText("You escaped the room!");
+      endLabel.setText("You escaped!");
       escapePlayer =
           new MediaPlayer(
               new Media(getClass().getResource("/sounds/escape.mp3").toURI().toString()));
@@ -38,7 +38,7 @@ public class EndPageController {
           });
       escapePlayer.play();
     } else {
-      endLabel.setText("You failed to escape the room!");
+      endLabel.setText("You failed to escape . . .");
     }
   }
 

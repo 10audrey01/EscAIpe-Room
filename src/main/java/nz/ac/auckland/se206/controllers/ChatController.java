@@ -48,9 +48,9 @@ public class ChatController {
             chatCompletionRequest =
                 new ChatCompletionRequest()
                     .setN(1)
-                    .setTemperature(0.8)
+                    .setTemperature(1.2)
                     .setTopP(0.8)
-                    .setMaxTokens(100);
+                    .setMaxTokens(200);
             runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord("vinyl")));
             return null;
           }

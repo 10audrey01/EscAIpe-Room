@@ -14,4 +14,7 @@ public class GameState {
 
   /** Indicates whether the vinyl has been played. */
   public static boolean isVinylPlayed = false;
+
+  /** Indicates whether the user escaped. */
+  public static boolean isEscaped = false;
 }

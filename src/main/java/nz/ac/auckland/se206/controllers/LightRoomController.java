@@ -32,14 +32,14 @@ public class LightRoomController {
     VINYL_PLAYER
   }
 
+  private static MediaPlayer vinylMediaPlayer;
   private Item currentItem;
-  private MediaPlayer vinylMediaPlayer;
 
   @FXML
-  private void onClickDoor() {
+  private void onClickDoor() throws IOException {
     if (GameState.isKeyFound) {
-      // App.setUi(AppUi.WIN);
-      System.out.println("You win!");
+      GameState.isEscaped = true;
+      App.setRoot("endPage");
     } else {
       itemLabel.setText("   The door is locked!");
       gameDialogue.setVisible(true);
@@ -104,7 +104,7 @@ public class LightRoomController {
           Media vinylSong =
               new Media(App.class.getResource("/sounds/vinylSong.mp3").toURI().toString());
           vinylMediaPlayer = new MediaPlayer(vinylSong);
-          App.getMusicPlayer().stop();
+          StartPageController.getMusicPlayer().stop();
           vinylMediaPlayer.play();
           GameState.isVinylPlayed = true;
           break;
@@ -120,5 +120,9 @@ public class LightRoomController {
   @FXML
   private void onClickOk() {
     gameDialogue.setVisible(false);
+  }
+
+  public static MediaPlayer getVinylMediaPlayer() {
+    return vinylMediaPlayer;
   }
 }

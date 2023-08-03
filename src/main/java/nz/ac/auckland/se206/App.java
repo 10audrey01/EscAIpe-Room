@@ -6,10 +6,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 
 /**
@@ -19,7 +16,6 @@ import nz.ac.auckland.se206.SceneManager.AppUi;
 public class App extends Application {
 
   private static Scene scene;
-  private static MediaPlayer musicPlayer;
 
   public static void main(final String[] args) {
     launch();
@@ -64,22 +60,8 @@ public class App extends Application {
 
     SceneManager.addUi(AppUi.CHAT, loadFxml("chat"));
 
-    Media mainMusic = new Media(App.class.getResource("/sounds/mainMusic.mp3").toURI().toString());
-    musicPlayer = new MediaPlayer(mainMusic);
-    musicPlayer.setOnEndOfMedia(
-        new Runnable() {
-          public void run() {
-            musicPlayer.seek(Duration.ZERO);
-          }
-        });
-    musicPlayer.play();
-
     scene = new Scene(SceneManager.getUiRoot(AppUi.START_PAGE), 970, 790);
     stage.setScene(scene);
     stage.show();
-  }
-
-  public static MediaPlayer getMusicPlayer() {
-    return musicPlayer;
   }
 }

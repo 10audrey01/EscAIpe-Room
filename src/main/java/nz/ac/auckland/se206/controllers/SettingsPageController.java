@@ -23,7 +23,7 @@ public class SettingsPageController {
             new InvalidationListener() {
               @Override
               public void invalidated(javafx.beans.Observable observable) {
-                App.getMusicPlayer().setVolume(musicVolumeSlider.getValue() / 100);
+                StartPageController.getMusicPlayer().setVolume(musicVolumeSlider.getValue() / 100);
               }
             });
   }

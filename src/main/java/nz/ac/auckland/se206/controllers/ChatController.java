@@ -74,7 +74,11 @@ public class ChatController {
    * @param msg the chat message to append
    */
   private void appendChatMessage(ChatMessage msg) {
-    chatTextArea.appendText(msg.getRole() + ": " + msg.getContent() + "\n\n");
+    if (msg.getRole().equals("user")) {
+      chatTextArea.appendText("You: " + msg.getContent() + "\n\n");
+    } else if (msg.getRole().equals("assistant")) {
+      chatTextArea.appendText("Book: " + msg.getContent() + "\n\n");
+    }
   }
 
   /**

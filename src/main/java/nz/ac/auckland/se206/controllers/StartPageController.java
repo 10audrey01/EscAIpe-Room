@@ -9,6 +9,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 
@@ -35,7 +36,20 @@ public class StartPageController {
 
   @FXML
   private void onClickPlayButton(ActionEvent event) throws IOException {
-    App.setRoot("lightRoom");
+    GameState.isRiddleResolved = false;
+    GameState.isKeyFound = false;
+    GameState.isVinylFound = false;
+    GameState.isVinylPlaying = false;
+    GameState.isEscaped = false;
+
+    SceneManager.addUi(AppUi.LIGHT_ROOM, App.loadFxml("lightRoom"));
+    SceneManager.addUi(AppUi.DARK_ROOM, App.loadFxml("darkRoom"));
+    SceneManager.addUi(AppUi.CHAT, App.loadFxml("chat"));
+
+    LightRoomController.playTimer();
+    DarkRoomController.playTimer();
+
+    App.setUi(AppUi.LIGHT_ROOM);
   }
 
   @FXML

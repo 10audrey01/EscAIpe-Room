@@ -43,7 +43,7 @@ public class LightRoomController {
   private static final Integer START_TIME_MIN = 2;
   private static final Integer START_TIME_SEC = 00;
   private static MediaPlayer vinylMediaPlayer;
-  private Timeline timeline;
+  private static Timeline timeline;
   private Integer timeMinutes = START_TIME_MIN;
   private Integer timeSeconds = START_TIME_SEC;
   private Item currentItem;
@@ -86,18 +86,18 @@ public class LightRoomController {
       currentItem = Item.VINYL_PLAYER;
       itemLabelYesNo.setText("   Play the vinyl?");
       gameDialogueYesNo.setVisible(true);
-    }
 
-    if (vinylMediaPlayer != null) {
-      currentItem = Item.VINYL_PLAYER;
-      itemLabelYesNo.setText("   Stop the vinyl player?");
-      gameDialogueYesNo.setVisible(true);
+      if (GameState.isVinylPlaying) {
+        currentItem = Item.VINYL_PLAYER;
+        itemLabelYesNo.setText("   Stop the vinyl player?");
+        gameDialogueYesNo.setVisible(true);
+      }
     }
   }
 
   @FXML
   private void onClickGuitar() {
-    if (GameState.isVinylPlayed) {
+    if (GameState.isVinylPlaying) {
       itemLabel.setText("   You found a key!");
       gameDialogue.setVisible(true);
       GameState.isKeyFound = true;
@@ -116,10 +116,10 @@ public class LightRoomController {
         App.setUi(AppUi.DARK_ROOM);
         break;
       case VINYL_PLAYER:
-        if (vinylMediaPlayer != null) {
+        if (GameState.isVinylPlaying) {
           gameDialogueYesNo.setVisible(false);
           vinylMediaPlayer.stop();
-          vinylMediaPlayer = null;
+          GameState.isVinylPlaying = false;
           StartPageController.getMusicPlayer().play();
         } else {
 
@@ -129,7 +129,7 @@ public class LightRoomController {
           vinylMediaPlayer = new MediaPlayer(vinylSong);
           StartPageController.getMusicPlayer().pause();
           vinylMediaPlayer.play();
-          GameState.isVinylPlayed = true;
+          GameState.isVinylPlaying = true;
           break;
         }
     }
@@ -183,6 +183,13 @@ public class LightRoomController {
                     }
                   }
                 }));
-    timeline.playFromStart();
+  }
+
+  public static void playTimer() {
+    timeline.play();
+  }
+
+  public static void stopTimer() {
+    timeline.stop();
   }
 }

@@ -13,6 +13,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -188,6 +189,6 @@ public class ChatController {
         new MediaPlayer(
             new Media(getClass().getResource("/sounds/bookClosing.mp3").toURI().toString()));
     bookClosingPlayer.play();
-    App.setRoot("darkRoom");
+    App.setUi(AppUi.DARK_ROOM);
   }
 }

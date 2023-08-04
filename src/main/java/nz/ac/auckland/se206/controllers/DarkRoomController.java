@@ -35,7 +35,7 @@ public class DarkRoomController {
 
   private static final Integer START_TIME_MIN = 2;
   private static final Integer START_TIME_SEC = 00;
-  private Timeline timeline;
+  private static Timeline timeline;
   private Integer timeMinutes = START_TIME_MIN;
   private Integer timeSeconds = START_TIME_SEC;
 
@@ -125,6 +125,13 @@ public class DarkRoomController {
                     }
                   }
                 }));
-    timeline.playFromStart();
+  }
+
+  public static void playTimer() {
+    timeline.play();
+  }
+
+  public static void stopTimer() {
+    timeline.stop();
   }
 }

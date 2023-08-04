@@ -37,7 +37,7 @@ public class App extends Application {
    * @return The node of the input file.
    * @throws IOException If the file is not found.
    */
-  private static Parent loadFxml(final String fxml) throws IOException {
+  public static Parent loadFxml(final String fxml) throws IOException {
     return new FXMLLoader(App.class.getResource("/fxml/" + fxml + ".fxml")).load();
   }
 
@@ -57,10 +57,6 @@ public class App extends Application {
     SceneManager.addController(
         AppUi.SETTINGS_PAGE,
         loader.getController()); // add settings controller reference for future use
-
-    SceneManager.addUi(AppUi.LIGHT_ROOM, loadFxml("lightRoom"));
-    SceneManager.addUi(AppUi.DARK_ROOM, loadFxml("darkRoom"));
-    SceneManager.addUi(AppUi.CHAT, loadFxml("chat"));
 
     scene = new Scene(SceneManager.getUiRoot(AppUi.START_PAGE), 970, 790);
     stage.setScene(scene);

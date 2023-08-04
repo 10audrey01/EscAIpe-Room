@@ -47,5 +47,15 @@
       <Rectangle fx:id="window" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="79.0" layoutX="430.0" layoutY="62.0" onMouseReleased="#onClickWindow" opacity="0.0" stroke="BLACK" strokeType="OUTSIDE" width="129.0" />
       <Rectangle fx:id="vinyl" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="91.0" layoutX="207.0" layoutY="413.0" onMouseReleased="#onClickVinyl" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="84.0" />
       <Rectangle fx:id="riddleBook" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="22.0" layoutX="119.0" layoutY="239.0" onMouseReleased="#onClickBook" opacity="0.0" stroke="BLACK" strokeType="OUTSIDE" width="9.0" />
+      <Label fx:id="timerSecLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="862.0" layoutY="48.0" prefHeight="45.0" prefWidth="62.0" style="-fx-background-color: #ffff;" text=": 00">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="timerMinLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="836.0" layoutY="48.0" prefHeight="45.0" prefWidth="26.0" style="-fx-background-color: #ffff;" text="2">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

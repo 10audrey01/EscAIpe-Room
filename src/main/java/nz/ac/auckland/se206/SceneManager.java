@@ -9,7 +9,7 @@ public class SceneManager {
     START_PAGE,
     SETTINGS_PAGE,
     CHAT,
-    ROOM,
+    LIGHT_ROOM,
   }
 
   private static HashMap<AppUi, Parent> sceneMap = new HashMap<AppUi, Parent>();

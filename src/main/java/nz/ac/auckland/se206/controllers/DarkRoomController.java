@@ -60,7 +60,7 @@ public class DarkRoomController {
     MediaPlayer blindsPlayer =
         new MediaPlayer(new Media(getClass().getResource("/sounds/blinds.mp3").toURI().toString()));
     blindsPlayer.play();
-    App.setRoot("lightRoom");
+    App.setUi(AppUi.LIGHT_ROOM);
   }
 
   @FXML

@@ -39,10 +39,12 @@ public class LightRoomController {
     VINYL_PLAYER
   }
 
+  private static final Integer START_TIME_MIN = 2;
+  private static final Integer START_TIME_SEC = 00;
   private static MediaPlayer vinylMediaPlayer;
   private Timeline timeline;
-  private Integer timeMinutes;
-  private Integer timeSeconds;
+  private Integer timeMinutes = START_TIME_MIN;
+  private Integer timeSeconds = START_TIME_SEC;
   private Item currentItem;
 
   @FXML

@@ -20,6 +20,23 @@ import nz.ac.auckland.se206.SceneManager.AppUi;
 
 public class LightRoomController {
 
+  private static final Integer START_TIME_MIN = 2;
+  private static final Integer START_TIME_SEC = 00;
+  private static MediaPlayer vinylMediaPlayer;
+  private static Timeline timeline;
+
+  public static MediaPlayer getVinylMediaPlayer() {
+    return vinylMediaPlayer;
+  }
+
+  public static void playTimer() {
+    timeline.play();
+  }
+
+  public static void stopTimer() {
+    timeline.stop();
+  }
+
   @FXML private Rectangle door;
   @FXML private Rectangle window;
   @FXML private Rectangle vinyl;
@@ -40,10 +57,6 @@ public class LightRoomController {
     VINYL_PLAYER
   }
 
-  private static final Integer START_TIME_MIN = 2;
-  private static final Integer START_TIME_SEC = 00;
-  private static MediaPlayer vinylMediaPlayer;
-  private static Timeline timeline;
   private Integer timeMinutes = START_TIME_MIN;
   private Integer timeSeconds = START_TIME_SEC;
   private Item currentItem;
@@ -106,30 +119,29 @@ public class LightRoomController {
 
   @FXML
   private void onClickYes() throws IOException, URISyntaxException {
-    switch (currentItem) {
+    switch (currentItem) { // switch statement to handle different items
       case WINDOW:
         gameDialogueYesNo.setVisible(false);
         MediaPlayer blindsPlayer =
             new MediaPlayer(
                 new Media(getClass().getResource("/sounds/blinds.mp3").toURI().toString()));
         blindsPlayer.play();
-        App.setUi(AppUi.DARK_ROOM);
+        App.setUi(AppUi.DARK_ROOM); // if window is clicked and yes is clicked, go to dark room
         break;
-      case VINYL_PLAYER:
+      case VINYL_PLAYER: // if vinyl player is clicked and yes is clicked
         if (GameState.isVinylPlaying) {
           gameDialogueYesNo.setVisible(false);
           vinylMediaPlayer.stop();
           GameState.isVinylPlaying = false;
-          StartPageController.getMusicPlayer().play();
+          StartPageController.getMusicPlayer().play(); // if vinyl player is playing, stop it
         } else {
-
           gameDialogueYesNo.setVisible(false);
           Media vinylSong =
               new Media(App.class.getResource("/sounds/vinylSong.mp3").toURI().toString());
           vinylMediaPlayer = new MediaPlayer(vinylSong);
           StartPageController.getMusicPlayer().pause();
           vinylMediaPlayer.play();
-          GameState.isVinylPlaying = true;
+          GameState.isVinylPlaying = true; // if vinyl player is not playing, play it
           break;
         }
     }
@@ -145,51 +157,40 @@ public class LightRoomController {
     gameDialogue.setVisible(false);
   }
 
-  public static MediaPlayer getVinylMediaPlayer() {
-    return vinylMediaPlayer;
-  }
-
   public void startTimer() {
     timerMinLabel.setText(timeMinutes.toString());
     timerSecLabel.setText(": 00");
-    timeline = new Timeline();
+    timeline = new Timeline(); // create a timeline for the timer
     timeline.setCycleCount(Timeline.INDEFINITE);
     timeline
         .getKeyFrames()
         .add(
             new KeyFrame(
-                Duration.seconds(1),
+                Duration.seconds(1), // handler is called every second
                 new EventHandler<ActionEvent>() {
                   @Override
                   public void handle(ActionEvent event) {
                     timeSeconds--;
-                    if (timeSeconds < 0 && timeMinutes > 0) {
+                    if (timeSeconds < 0
+                        && timeMinutes > 0) { // decrement minutes if seconds reach 0
                       timeMinutes--;
                       timeSeconds = 59;
                     }
                     timerMinLabel.setText(timeMinutes.toString());
                     if (timeSeconds < 10) {
-                      timerSecLabel.setText(": 0" + timeSeconds.toString());
+                      timerSecLabel.setText(": 0" + timeSeconds.toString()); // aesthetic purposes
                     } else {
                       timerSecLabel.setText(": " + timeSeconds.toString());
                     }
                     if (timeMinutes <= 0 && timeSeconds <= 0) {
                       timeline.stop();
                       try {
-                        App.setRoot("endPage");
+                        App.setRoot("endPage"); // go to end page if time runs out
                       } catch (IOException e) {
                         e.printStackTrace();
                       }
                     }
                   }
                 }));
-  }
-
-  public static void playTimer() {
-    timeline.play();
-  }
-
-  public static void stopTimer() {
-    timeline.stop();
   }
 }

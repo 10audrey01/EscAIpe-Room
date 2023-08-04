@@ -48,7 +48,7 @@ public class EndPageController {
   }
 
   @FXML
-  public void onClickPlayAgain() throws IOException {
+  private void onClickPlayAgain() throws IOException {
     GameState.isRiddleResolved = false;
     GameState.isKeyFound = false;
     GameState.isVinylFound = false;
@@ -71,7 +71,7 @@ public class EndPageController {
   }
 
   @FXML
-  public void onClickReturnToMainMenu() throws IOException {
+  private void onClickReturnToMainMenu() throws IOException {
     GameState.isRiddleResolved = false;
     GameState.isKeyFound = false;
     GameState.isVinylFound = false;

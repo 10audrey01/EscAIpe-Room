@@ -15,11 +15,15 @@ import nz.ac.auckland.se206.SceneManager.AppUi;
 
 public class StartPageController {
 
+  private static MediaPlayer musicPlayer;
+
+  public static MediaPlayer getMusicPlayer() {
+    return musicPlayer;
+  }
+
   @FXML private Button playButton;
   @FXML private Button settingsButton;
   @FXML private Button exitButton;
-
-  private static MediaPlayer musicPlayer;
 
   @FXML
   public void initialize() throws URISyntaxException {
@@ -65,9 +69,5 @@ public class StartPageController {
   @FXML
   private void onClickExitButton(ActionEvent event) {
     System.exit(0);
-  }
-
-  public static MediaPlayer getMusicPlayer() {
-    return musicPlayer;
   }
 }

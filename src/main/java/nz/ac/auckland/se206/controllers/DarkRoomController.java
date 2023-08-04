@@ -20,6 +20,18 @@ import nz.ac.auckland.se206.SceneManager.AppUi;
 
 public class DarkRoomController {
 
+  private static final Integer START_TIME_MIN = 2;
+  private static final Integer START_TIME_SEC = 00;
+  private static Timeline timeline;
+
+  public static void playTimer() {
+    timeline.play();
+  }
+
+  public static void stopTimer() {
+    timeline.stop();
+  }
+
   @FXML private Rectangle riddleBook;
   @FXML private Rectangle window;
   @FXML private Rectangle vinyl;
@@ -33,9 +45,6 @@ public class DarkRoomController {
   @FXML private Button noButton;
   @FXML private Button okButton;
 
-  private static final Integer START_TIME_MIN = 2;
-  private static final Integer START_TIME_SEC = 00;
-  private static Timeline timeline;
   private Integer timeMinutes = START_TIME_MIN;
   private Integer timeSeconds = START_TIME_SEC;
 
@@ -82,56 +91,49 @@ public class DarkRoomController {
   }
 
   @FXML
-  public void onClickNo() {
+  private void onClickNo() {
     gameDialogueYesNo.setVisible(false);
   }
 
   @FXML
-  public void onClickOk() {
+  private void onClickOk() {
     gameDialogue.setVisible(false);
   }
 
   public void startTimer() {
     timerMinLabel.setText(timeMinutes.toString());
     timerSecLabel.setText(": 00");
-    timeline = new Timeline();
+    timeline = new Timeline(); // create a timeline for the timer
     timeline.setCycleCount(Timeline.INDEFINITE);
     timeline
         .getKeyFrames()
         .add(
             new KeyFrame(
-                Duration.seconds(1),
+                Duration.seconds(1), // handler is called every second
                 new EventHandler<ActionEvent>() {
                   @Override
                   public void handle(ActionEvent event) {
                     timeSeconds--;
-                    if (timeSeconds < 0 && timeMinutes > 0) {
+                    if (timeSeconds < 0
+                        && timeMinutes > 0) { // decrement minutes if seconds reach 0
                       timeMinutes--;
                       timeSeconds = 59;
                     }
                     timerMinLabel.setText(timeMinutes.toString());
                     if (timeSeconds < 10) {
-                      timerSecLabel.setText(": 0" + timeSeconds.toString());
+                      timerSecLabel.setText(": 0" + timeSeconds.toString()); // aesthetic purposes
                     } else {
                       timerSecLabel.setText(": " + timeSeconds.toString());
                     }
                     if (timeMinutes <= 0 && timeSeconds <= 0) {
                       timeline.stop();
                       try {
-                        App.setRoot("endPage");
+                        App.setRoot("endPage"); // go to end page if time runs out
                       } catch (IOException e) {
                         e.printStackTrace();
                       }
                     }
                   }
                 }));
-  }
-
-  public static void playTimer() {
-    timeline.play();
-  }
-
-  public static void stopTimer() {
-    timeline.stop();
   }
 }

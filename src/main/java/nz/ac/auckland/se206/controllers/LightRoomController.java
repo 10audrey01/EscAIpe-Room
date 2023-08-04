@@ -2,6 +2,10 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -9,6 +13,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 
@@ -23,6 +28,8 @@ public class LightRoomController {
   @FXML private Pane gameDialogueYesNo;
   @FXML private Label itemLabel;
   @FXML private Label itemLabelYesNo;
+  @FXML private Label timerMinLabel;
+  @FXML private Label timerSecLabel;
   @FXML private Button yesButton;
   @FXML private Button noButton;
   @FXML private Button okButton;
@@ -33,7 +40,15 @@ public class LightRoomController {
   }
 
   private static MediaPlayer vinylMediaPlayer;
+  private Timeline timeline;
+  private Integer timeMinutes;
+  private Integer timeSeconds;
   private Item currentItem;
+
+  @FXML
+  public void initialize() {
+    startTimer();
+  }
 
   @FXML
   private void onClickDoor() throws IOException {
@@ -129,5 +144,42 @@ public class LightRoomController {
 
   public static MediaPlayer getVinylMediaPlayer() {
     return vinylMediaPlayer;
+  }
+
+  public void startTimer() {
+    timerMinLabel.setText("2");
+    timerSecLabel.setText(": 00");
+    timeline = new Timeline();
+    timeline.setCycleCount(Timeline.INDEFINITE);
+    timeline
+        .getKeyFrames()
+        .add(
+            new KeyFrame(
+                Duration.seconds(1),
+                new EventHandler<ActionEvent>() {
+                  @Override
+                  public void handle(ActionEvent event) {
+                    timeSeconds--;
+                    if (timeSeconds < 0 && timeMinutes > 0) {
+                      timeMinutes--;
+                      timeSeconds = 59;
+                    }
+                    timerMinLabel.setText(timeMinutes.toString());
+                    if (timeSeconds < 10) {
+                      timerSecLabel.setText(": 0" + timeSeconds.toString());
+                    } else {
+                      timerSecLabel.setText(": " + timeSeconds.toString());
+                    }
+                    if (timeMinutes <= 0 && timeSeconds <= 0) {
+                      timeline.stop();
+                      try {
+                        App.setRoot("endPage");
+                      } catch (IOException e) {
+                        e.printStackTrace();
+                      }
+                    }
+                  }
+                }));
+    timeline.playFromStart();
   }
 }

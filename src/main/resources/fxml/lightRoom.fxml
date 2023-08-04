@@ -49,5 +49,15 @@
       <Rectangle fx:id="vinylPlayer" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="139.0" layoutX="70.0" layoutY="490.0" onMouseReleased="#onClickVinylPlayer" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="71.0" />
       <Rectangle fx:id="guitar" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="89.0" layoutX="819.0" layoutY="295.0" onMouseReleased="#onClickGuitar" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="85.0" />
       <Rectangle fx:id="door" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="73.0" layoutX="451.0" layoutY="689.0" onMouseReleased="#onClickDoor" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="85.0" />
+      <Label fx:id="timerMinLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="836.0" layoutY="38.0" prefHeight="45.0" prefWidth="26.0" style="-fx-background-color: #ffff;" text="2">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="timerSecLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="862.0" layoutY="38.0" prefHeight="45.0" prefWidth="62.0" style="-fx-background-color: #ffff;" text=": 00">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

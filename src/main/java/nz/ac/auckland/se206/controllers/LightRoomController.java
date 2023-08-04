@@ -16,6 +16,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.SceneManager.AppUi;
 
 public class LightRoomController {
 
@@ -112,7 +113,7 @@ public class LightRoomController {
             new MediaPlayer(
                 new Media(getClass().getResource("/sounds/blinds.mp3").toURI().toString()));
         blindsPlayer.play();
-        App.setRoot("darkRoom");
+        App.setUi(AppUi.DARK_ROOM);
         break;
       case VINYL_PLAYER:
         if (vinylMediaPlayer != null) {
@@ -149,7 +150,7 @@ public class LightRoomController {
   }
 
   public void startTimer() {
-    timerMinLabel.setText("2");
+    timerMinLabel.setText(timeMinutes.toString());
     timerSecLabel.setText(": 00");
     timeline = new Timeline();
     timeline.setCycleCount(Timeline.INDEFINITE);

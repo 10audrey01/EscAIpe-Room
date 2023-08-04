@@ -25,6 +25,8 @@ public class ChatController {
   @FXML private TextArea chatTextArea;
   @FXML private TextField inputText;
   @FXML private Label chatDialogueLabel;
+  @FXML private Label timerMinLabel;
+  @FXML private Label timerSecLabel;
   @FXML private Button sendButton;
   @FXML private Button goBackButton;
 

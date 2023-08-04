@@ -59,6 +59,7 @@ public class App extends Application {
         loader.getController()); // add settings controller reference for future use
 
     SceneManager.addUi(AppUi.LIGHT_ROOM, loadFxml("lightRoom"));
+    SceneManager.addUi(AppUi.DARK_ROOM, loadFxml("darkRoom"));
     SceneManager.addUi(AppUi.CHAT, loadFxml("chat"));
 
     scene = new Scene(SceneManager.getUiRoot(AppUi.START_PAGE), 970, 790);

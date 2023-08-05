@@ -7,7 +7,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="970.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.StartPageController">
    <children>
-      <Label alignment="CENTER" layoutX="269.0" layoutY="129.0" prefHeight="109.0" prefWidth="436.0" text="Game name">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-3.0" layoutY="129.0" prefHeight="109.0" prefWidth="980.0" text="Escape my room">
          <font>
             <Font size="64.0" />
          </font>

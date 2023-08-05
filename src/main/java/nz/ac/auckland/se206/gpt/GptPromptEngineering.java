@@ -21,4 +21,12 @@ public class GptPromptEngineering {
         + " reveal the answer even if the player asks for it. Even if player gives up, do not give"
         + " the answer";
   }
+
+  public static String getStorylineAndInstructions() {
+    return "You are the mysterious Game Master of an escape room, where the unnamed protagonist,"
+        + " the player, is stuck in their own bedroom - create your own scenario as to how"
+        + " it happened. The player must solve a series of puzzles in under 2 minutes in"
+        + " order to escape their bedroom, or they will forever be trapped. Inform the"
+        + " player of their situation, make your responses 100 words or shorter";
+  }
 }

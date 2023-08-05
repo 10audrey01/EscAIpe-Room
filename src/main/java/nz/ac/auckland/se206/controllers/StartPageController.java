@@ -50,10 +50,7 @@ public class StartPageController {
     SceneManager.addUi(AppUi.DARK_ROOM, App.loadFxml("darkRoom"));
     SceneManager.addUi(AppUi.CHAT, App.loadFxml("chat"));
 
-    LightRoomController.playTimer();
-    DarkRoomController.playTimer();
-
-    App.setUi(AppUi.LIGHT_ROOM);
+    App.setUi(AppUi.STORY_PAGE);
   }
 
   @FXML

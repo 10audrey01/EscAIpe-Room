@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="aiDialogue" prefHeight="790.0" prefWidth="960.0" style="-fx-background-color: #FFFf;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.StoryChatController">
+   <children>
+      <TextField fx:id="userTextField" layoutX="11.0" layoutY="629.0" prefHeight="55.0" prefWidth="693.0">
+         <font>
+            <Font size="25.0" />
+         </font></TextField>
+      <Button fx:id="talkButton" layoutX="789.0" layoutY="607.0" mnemonicParsing="false" onAction="#onClickTalk" prefHeight="44.0" prefWidth="85.0" text="Talk">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <TextArea fx:id="aiTextArea" editable="false" layoutX="10.0" layoutY="14.0" prefHeight="593.0" prefWidth="938.0" wrapText="true">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </TextArea>
+      <Button fx:id="aiOkButton" layoutX="801.0" layoutY="651.0" mnemonicParsing="false" onAction="#onClickAiOk" prefHeight="44.0" prefWidth="62.0" text="OK">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>

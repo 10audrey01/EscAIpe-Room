@@ -44,6 +44,7 @@ public class LightRoomController {
   @FXML private Rectangle guitar;
   @FXML private Pane gameDialogue;
   @FXML private Pane gameDialogueYesNo;
+
   @FXML private Label itemLabel;
   @FXML private Label itemLabelYesNo;
   @FXML private Label timerMinLabel;

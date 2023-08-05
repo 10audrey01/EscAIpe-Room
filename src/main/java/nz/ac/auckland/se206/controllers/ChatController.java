@@ -41,7 +41,7 @@ public class ChatController {
   @FXML
   public void initialize() throws ApiProxyException {
 
-    Task<Void> initializeTask =
+    Task<Void> initializeRiddleTask =
         new Task<Void>() {
 
           @Override
@@ -59,19 +59,36 @@ public class ChatController {
           }
         };
 
-    initializeTask.setOnRunning(
+    Task<Void> initializeStoryTask =
+        new Task<Void>() {
+          @Override
+          protected Void call() throws Exception {
+            chatCompletionRequest =
+                new ChatCompletionRequest()
+                    .setN(1)
+                    .setTemperature(1.2)
+                    .setTopP(0.8)
+                    .setMaxTokens(200);
+            runGpt(new ChatMessage("user", GptPromptEngineering.getStorylineAndInstructions()));
+            return null;
+          }
+        };
+
+    initializeRiddleTask.setOnRunning(
         e -> {
           chatDialogueLabel.setText(
               "Flipping through the pages . . ."); // let user know riddle is loading
         });
 
-    initializeTask.setOnSucceeded(
+    initializeRiddleTask.setOnSucceeded(
         e -> {
           chatDialogueLabel.setText("You found a riddle!"); // let user know riddle is loaded
         });
 
-    Thread initializeThread = new Thread(initializeTask, "initializeThread");
-    initializeThread.start();
+    Thread initializeStoryThread = new Thread(initializeStoryTask, "initializeStoryThread");
+    Thread initializeRiddleThread = new Thread(initializeRiddleTask, "initializeRiddleThread");
+    initializeStoryThread.start();
+    initializeRiddleThread.start();
   }
 
   /**
@@ -95,7 +112,7 @@ public class ChatController {
    * @throws ApiProxyException if there is an error communicating with the API proxy
    * @throws InterruptedException
    */
-  private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
+  public ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
     chatCompletionRequest.addMessage(msg);
 
     try {

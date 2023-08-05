@@ -8,7 +8,6 @@ public class SceneManager {
   public enum AppUi {
     START_PAGE,
     SETTINGS_PAGE,
-    STORY_PAGE,
     CHAT,
     LIGHT_ROOM,
     DARK_ROOM

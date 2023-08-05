@@ -65,9 +65,6 @@ public class EndPageController {
     SceneManager.addUi(AppUi.DARK_ROOM, App.loadFxml("darkRoom"));
     SceneManager.addUi(AppUi.CHAT, App.loadFxml("chat"));
 
-    LightRoomController.playTimer();
-    DarkRoomController.playTimer();
-
     App.setUi(AppUi.STORY_PAGE);
   }
 

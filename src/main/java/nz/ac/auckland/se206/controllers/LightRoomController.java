@@ -68,12 +68,20 @@ public class LightRoomController {
   }
 
   @FXML
-  private void onClickDoor() throws IOException {
+  private void onClickDoor() throws IOException, URISyntaxException {
     if (GameState.isKeyFound) {
       GameState.isEscaped = true;
+      MediaPlayer doorOpenPlayer =
+          new MediaPlayer(
+              new Media(getClass().getResource("/sounds/doorOpen.mp3").toURI().toString()));
+      doorOpenPlayer.play();
       App.setRoot("endPage");
     } else {
       itemLabel.setText("   The door is locked!");
+      MediaPlayer lockedDoorPlayer =
+          new MediaPlayer(
+              new Media(getClass().getResource("/sounds/doorLocked.mp3").toURI().toString()));
+      lockedDoorPlayer.play();
       gameDialogue.setVisible(true);
     }
   }

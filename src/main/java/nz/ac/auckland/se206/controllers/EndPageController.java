@@ -54,6 +54,7 @@ public class EndPageController {
     GameState.isVinylFound = false;
     GameState.isVinylPlaying = false;
     GameState.isEscaped = false;
+    GameState.isGameStarted = false;
 
     if (escapePlayer != null) {
       escapePlayer.stop();

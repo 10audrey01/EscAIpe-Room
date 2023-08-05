@@ -51,7 +51,7 @@ public class App extends Application {
   @Override
   public void start(final Stage stage) throws IOException, URISyntaxException {
     SceneManager.addUi(AppUi.START_PAGE, loadFxml("startPage"));
-    SceneManager.addUi(AppUi.STORY_PAGE, loadFxml("storyChat"));
+    SceneManager.addUi(AppUi.STORY_PAGE, App.loadFxml("storyChat"));
 
     FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/settingsPage.fxml"));
     SceneManager.addUi(AppUi.SETTINGS_PAGE, loader.load());

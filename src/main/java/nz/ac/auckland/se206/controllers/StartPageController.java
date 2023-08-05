@@ -45,6 +45,7 @@ public class StartPageController {
     GameState.isVinylFound = false;
     GameState.isVinylPlaying = false;
     GameState.isEscaped = false;
+    GameState.isGameStarted = true;
 
     SceneManager.addUi(AppUi.LIGHT_ROOM, App.loadFxml("lightRoom"));
     SceneManager.addUi(AppUi.DARK_ROOM, App.loadFxml("darkRoom"));

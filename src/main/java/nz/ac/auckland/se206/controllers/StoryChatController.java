@@ -16,6 +16,7 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
+import nz.ac.auckland.se206.speech.TextToSpeech;
 
 public class StoryChatController {
 
@@ -26,6 +27,7 @@ public class StoryChatController {
   @FXML private Button aiOkButton;
 
   private ChatCompletionRequest chatCompletionRequest;
+  private Thread textToSpeechThread;
 
   @FXML
   public void initialize() {
@@ -45,8 +47,24 @@ public class StoryChatController {
           }
         };
 
-    Thread initializeStoryThread = new Thread(initializeStoryTask, "initializeStoryThread");
+    Task<Void> textToSpeechTask =
+        new Task<Void>() {
+          @Override
+          protected Void call() throws Exception {
+            TextToSpeech.main(new String[] {aiTextArea.getText()});
+            return null;
+          }
+        };
 
+    initializeStoryTask.setOnSucceeded(
+        e -> {
+          textToSpeechThread = new Thread(textToSpeechTask, "textToSpeechThread");
+          textToSpeechThread.start();
+        });
+
+    Thread initializeStoryThread = new Thread(initializeStoryTask, "initializeStoryThread");
+    textToSpeechThread = new Thread(textToSpeechTask, "textToSpeechThread");
+    textToSpeechThread.start();
     initializeStoryThread.start();
   }
 

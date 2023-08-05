@@ -52,11 +52,11 @@ public class App extends Application {
   public void start(final Stage stage) throws IOException, URISyntaxException {
     SceneManager.addUi(AppUi.START_PAGE, loadFxml("startPage"));
 
-    FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/settingsPage.fxml"));
-    SceneManager.addUi(AppUi.SETTINGS_PAGE, loader.load());
+    FXMLLoader settingsLoader = new FXMLLoader(App.class.getResource("/fxml/settingsPage.fxml"));
+    SceneManager.addUi(AppUi.SETTINGS_PAGE, settingsLoader.load());
     SceneManager.addController(
         AppUi.SETTINGS_PAGE,
-        loader.getController()); // add settings controller reference for future use
+        settingsLoader.getController()); // add settings controller reference for future use
 
     scene = new Scene(SceneManager.getUiRoot(AppUi.START_PAGE), 970, 790);
     stage.setScene(scene);

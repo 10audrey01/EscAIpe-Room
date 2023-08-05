@@ -5,6 +5,7 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -25,6 +26,7 @@ public class StoryChatController {
   @FXML private TextField userTextField;
   @FXML private Button talkButton;
   @FXML private Button aiOkButton;
+  @FXML private Label loadingLabel;
 
   private ChatCompletionRequest chatCompletionRequest;
   private Thread textToSpeechThread;
@@ -58,13 +60,15 @@ public class StoryChatController {
 
     initializeStoryTask.setOnSucceeded(
         e -> {
+          loadingLabel.setVisible(false);
+          aiDialogue.setStyle("-fx-background-color: #ffff;");
+          aiTextArea.setVisible(true);
+          aiOkButton.setVisible(true);
           textToSpeechThread = new Thread(textToSpeechTask, "textToSpeechThread");
           textToSpeechThread.start();
         });
 
     Thread initializeStoryThread = new Thread(initializeStoryTask, "initializeStoryThread");
-    textToSpeechThread = new Thread(textToSpeechTask, "textToSpeechThread");
-    textToSpeechThread.start();
     initializeStoryThread.start();
   }
 
@@ -85,7 +89,7 @@ public class StoryChatController {
     if (msg.getRole().equals("user")) {
       aiTextArea.appendText("You: " + msg.getContent() + "\n\n");
     } else if (msg.getRole().equals("assistant")) {
-      aiTextArea.appendText("Game: " + msg.getContent() + "\n\n");
+      aiTextArea.appendText(msg.getContent() + "\n\n");
     }
   }
 

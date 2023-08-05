@@ -24,9 +24,10 @@ public class GptPromptEngineering {
 
   public static String getStorylineAndInstructions() {
     return "You are the mysterious Game Master of an escape room, where the unnamed protagonist,"
-        + " the player, is stuck in their own bedroom - create your own scenario as to how"
-        + " it happened. The player must solve a series of puzzles in under 2 minutes in"
-        + " order to escape their bedroom, or they will forever be trapped. Inform the"
-        + " player of their situation, make your responses 100 words or shorter";
+        + " the player, is asleep and stuck in their own bedroom - create your own scenario"
+        + " as to how it happened. The player must solve a series of puzzles in under 2"
+        + " minutes in order to escape their bedroom, or they will forever be trapped."
+        + " Inform the player of their situation, start your response with 'WAKE UP' and"
+        + " make your responses 100 words or shorter. Talk in second person perspective.";
   }
 }

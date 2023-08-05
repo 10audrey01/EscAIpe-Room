@@ -54,13 +54,13 @@ public class EndPageController {
     GameState.isVinylFound = false;
     GameState.isVinylPlaying = false;
     GameState.isEscaped = false;
-    GameState.isGameStarted = false;
 
     if (escapePlayer != null) {
       escapePlayer.stop();
     }
     StartPageController.getMusicPlayer().play();
 
+    SceneManager.addUi(AppUi.STORY_PAGE, App.loadFxml("storyChat"));
     SceneManager.addUi(AppUi.LIGHT_ROOM, App.loadFxml("lightRoom"));
     SceneManager.addUi(AppUi.DARK_ROOM, App.loadFxml("darkRoom"));
     SceneManager.addUi(AppUi.CHAT, App.loadFxml("chat"));
@@ -68,7 +68,7 @@ public class EndPageController {
     LightRoomController.playTimer();
     DarkRoomController.playTimer();
 
-    App.setUi(AppUi.LIGHT_ROOM);
+    App.setUi(AppUi.STORY_PAGE);
   }
 
   @FXML

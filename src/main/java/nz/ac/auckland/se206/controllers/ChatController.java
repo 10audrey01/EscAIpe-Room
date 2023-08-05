@@ -59,21 +59,6 @@ public class ChatController {
           }
         };
 
-    Task<Void> initializeStoryTask =
-        new Task<Void>() {
-          @Override
-          protected Void call() throws Exception {
-            chatCompletionRequest =
-                new ChatCompletionRequest()
-                    .setN(1)
-                    .setTemperature(1.2)
-                    .setTopP(0.8)
-                    .setMaxTokens(200);
-            runGpt(new ChatMessage("user", GptPromptEngineering.getStorylineAndInstructions()));
-            return null;
-          }
-        };
-
     initializeRiddleTask.setOnRunning(
         e -> {
           chatDialogueLabel.setText(
@@ -85,9 +70,7 @@ public class ChatController {
           chatDialogueLabel.setText("You found a riddle!"); // let user know riddle is loaded
         });
 
-    Thread initializeStoryThread = new Thread(initializeStoryTask, "initializeStoryThread");
     Thread initializeRiddleThread = new Thread(initializeRiddleTask, "initializeRiddleThread");
-    initializeStoryThread.start();
     initializeRiddleThread.start();
   }
 

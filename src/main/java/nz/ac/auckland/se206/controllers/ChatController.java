@@ -191,4 +191,8 @@ public class ChatController {
     bookClosingPlayer.play();
     App.setUi(AppUi.DARK_ROOM);
   }
+
+  public String getChatText() {
+    return chatTextArea.getText();
+  }
 }

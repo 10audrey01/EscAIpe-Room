@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -48,7 +49,10 @@ public class StartPageController {
 
     SceneManager.addUi(AppUi.LIGHT_ROOM, App.loadFxml("lightRoom"));
     SceneManager.addUi(AppUi.DARK_ROOM, App.loadFxml("darkRoom"));
-    SceneManager.addUi(AppUi.CHAT, App.loadFxml("chat"));
+
+    FXMLLoader chatLoader = new FXMLLoader(App.class.getResource("/fxml/chat.fxml"));
+    SceneManager.addUi(AppUi.CHAT, chatLoader.load());
+    SceneManager.addController(AppUi.CHAT, chatLoader.getController());
 
     App.setRoot("storyChat");
   }

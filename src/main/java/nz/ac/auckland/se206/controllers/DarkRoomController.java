@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -16,7 +17,9 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
+import nz.ac.auckland.se206.speech.TextToSpeech;
 
 public class DarkRoomController {
 
@@ -60,7 +63,22 @@ public class DarkRoomController {
           new MediaPlayer(
               new Media(getClass().getResource("/sounds/bookOpening.mp3").toURI().toString()));
       bookOpeningPlayer.play();
+
       App.setUi(AppUi.CHAT);
+
+      Task<Void> textToSpeechTask =
+          new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+              ChatController chatController =
+                  (ChatController) SceneManager.getController(AppUi.CHAT);
+              TextToSpeech.main(new String[] {chatController.getChatText()});
+              return null;
+            }
+          };
+
+      Thread textToSpeechThread = new Thread(textToSpeechTask, "textToSpeechThread");
+      textToSpeechThread.start();
     } else if (GameState.isRiddleResolved) {
       itemLabel.setText("   You already solved the riddle! The answer was 'vinyl'.");
       gameDialogue.setVisible(true);

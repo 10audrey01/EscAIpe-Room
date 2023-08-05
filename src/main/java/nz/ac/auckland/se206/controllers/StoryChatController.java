@@ -29,7 +29,6 @@ public class StoryChatController {
   @FXML private Label loadingLabel;
 
   private ChatCompletionRequest chatCompletionRequest;
-  private Thread textToSpeechThread;
 
   @FXML
   public void initialize() {
@@ -64,7 +63,7 @@ public class StoryChatController {
           aiDialogue.setStyle("-fx-background-color: #ffff;");
           aiTextArea.setVisible(true);
           aiOkButton.setVisible(true);
-          textToSpeechThread = new Thread(textToSpeechTask, "textToSpeechThread");
+          Thread textToSpeechThread = new Thread(textToSpeechTask, "textToSpeechThread");
           textToSpeechThread.start();
         });
 

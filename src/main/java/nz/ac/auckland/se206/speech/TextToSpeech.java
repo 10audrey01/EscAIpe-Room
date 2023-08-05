@@ -29,7 +29,7 @@ public class TextToSpeech {
     final TextToSpeech textToSpeech = new TextToSpeech();
 
     textToSpeech.speak(args);
-    textToSpeech.terminate();
+    // textToSpeech.terminate();
   }
 
   private final Synthesizer synthesizer;

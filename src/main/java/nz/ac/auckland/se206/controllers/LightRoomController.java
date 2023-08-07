@@ -89,7 +89,7 @@ public class LightRoomController {
   @FXML
   private void onClickWindow() {
     currentItem = Item.WINDOW;
-    itemLabelYesNo.setText("   Draw the blinds?");
+    itemLabelYesNo.setText("   Draw the blinds? Maybe you will see something different . . .");
     gameDialogueYesNo.setVisible(true);
   }
 

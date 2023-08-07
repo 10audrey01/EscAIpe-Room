@@ -142,10 +142,9 @@ public class ChatController {
   @FXML
   private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
     // let user know checking if there answer is right
-    chatDialogueLabel.setText("Looks like the book is checking if you are worthy . . .");
+    chatDialogueLabel.setText("The book is reading what you wrote . . .");
     String message = inputText.getText();
     sendButton.setDisable(true); // disable send button while processing message
-    goBackButton.setDisable(true);
 
     if (message.trim().isEmpty()) { // if user sends empty message, do nothing
       sendButton.setDisable(false);
@@ -188,20 +187,18 @@ public class ChatController {
     onSendMessageTask.setOnSucceeded(
         e -> {
           sendButton.setDisable(false);
-          goBackButton.setDisable(false);
 
           if (GameState.isRiddleResolved) {
-            chatDialogueLabel.setText("You are worthy!"); // riddle is solved
+            chatDialogueLabel.setText("You solved the riddle!"); // riddle is solved
           } else {
             chatDialogueLabel.setText(
-                "You are not worthy, try again!"); // riddle is not solved, try again
+                "Think about it more . . ."); // riddle is not solved, try again
           }
         });
 
     onSendMessageTask.setOnFailed(
         e -> {
           sendButton.setDisable(false);
-          goBackButton.setDisable(false);
         });
 
     Thread onSendMessageThread = new Thread(onSendMessageTask, "onSendMessageThread");

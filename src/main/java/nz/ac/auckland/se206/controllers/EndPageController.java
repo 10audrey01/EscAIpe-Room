@@ -20,6 +20,7 @@ public class EndPageController {
   @FXML private Button returnToMainMeuButton;
 
   private MediaPlayer escapePlayer;
+  private MediaPlayer escapeFailPlayer;
 
   @FXML
   public void initialize() throws URISyntaxException {
@@ -41,6 +42,16 @@ public class EndPageController {
       escapePlayer.play();
     } else {
       endLabel.setText("You failed to escape . . .");
+      escapeFailPlayer =
+          new MediaPlayer(
+              new Media(getClass().getResource("/sounds/escapeFail.mp3").toURI().toString()));
+      escapeFailPlayer.setOnEndOfMedia(
+          new Runnable() {
+            public void run() {
+              escapeFailPlayer.seek(Duration.ZERO);
+            }
+          });
+      escapeFailPlayer.play();
     }
 
     LightRoomController.stopTimer();
@@ -58,6 +69,8 @@ public class EndPageController {
 
     if (escapePlayer != null) {
       escapePlayer.stop();
+    } else if (escapeFailPlayer != null) {
+      escapeFailPlayer.stop();
     }
     StartPageController.getMainMusicPlayer().play();
 

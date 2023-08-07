@@ -2,6 +2,7 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.concurrent.atomic.AtomicBoolean;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.concurrent.Task;
@@ -50,6 +51,7 @@ public class DarkRoomController {
 
   private Integer timeMinutes = START_TIME_MIN;
   private Integer timeSeconds = START_TIME_SEC;
+  private AtomicBoolean hasBookSpoken = new AtomicBoolean(false);
 
   @FXML
   private void initialize() {
@@ -72,13 +74,17 @@ public class DarkRoomController {
             protected Void call() throws Exception {
               ChatController chatController =
                   (ChatController) SceneManager.getController(AppUi.CHAT);
-              TextToSpeech.main(new String[] {chatController.getChatText()});
+              String textWithoutRole = chatController.getChatText().substring(5);
+              TextToSpeech.main(new String[] {textWithoutRole});
               return null;
             }
           };
 
-      Thread textToSpeechThread = new Thread(textToSpeechTask, "textToSpeechThread");
-      textToSpeechThread.start();
+      if (hasBookSpoken.compareAndSet(false, true)) {
+        Thread textToSpeechThread = new Thread(textToSpeechTask, "textToSpeechThread");
+        textToSpeechThread.start();
+      }
+
     } else if (GameState.isRiddleResolved) {
       itemLabel.setText("   You already solved the riddle! The answer was 'vinyl'.");
       gameDialogue.setVisible(true);

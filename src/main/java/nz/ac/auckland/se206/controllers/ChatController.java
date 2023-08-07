@@ -20,6 +20,7 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
+import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /** Controller class for the chat view. */
 public class ChatController {
@@ -146,6 +147,19 @@ public class ChatController {
             if (lastMsg.getRole().equals("assistant")
                 && lastMsg.getContent().startsWith("Correct")) {
               GameState.isRiddleResolved = true;
+            }
+            if (lastMsg.getRole().equals("assistant")) {
+              Task<Void> textToSpeechTask =
+                  new Task<Void>() {
+
+                    @Override
+                    protected Void call() throws Exception {
+                      TextToSpeech.main(new String[] {lastMsg.getContent()});
+                      return null;
+                    }
+                  };
+              Thread textToSpeechThread = new Thread(textToSpeechTask, "textToSpeechThread");
+              textToSpeechThread.start();
             }
             return null;
           }

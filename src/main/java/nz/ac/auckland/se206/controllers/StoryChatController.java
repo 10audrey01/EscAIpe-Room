@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.io.File;
 import java.io.IOException;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -9,6 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.ChatMessage;
@@ -57,12 +60,20 @@ public class StoryChatController {
           }
         };
 
+    MediaPlayer sleepingPlayer =
+        new MediaPlayer(
+            new Media(new File("src/main/resources/sounds/sleeping.mp3").toURI().toString()));
+    StartPageController.getMainMusicPlayer().pause();
+    sleepingPlayer.play();
+
     initializeStoryTask.setOnSucceeded(
         e -> {
           loadingLabel.setVisible(false);
           aiDialogue.setStyle("-fx-background-color: #ffff;");
           aiTextArea.setVisible(true);
           aiOkButton.setVisible(true);
+          sleepingPlayer.stop();
+          StartPageController.getMainMusicPlayer().play();
           Thread textToSpeechThread = new Thread(textToSpeechTask, "textToSpeechThread");
           textToSpeechThread.start();
         });

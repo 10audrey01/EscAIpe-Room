@@ -59,7 +59,7 @@ public class EndPageController {
     if (escapePlayer != null) {
       escapePlayer.stop();
     }
-    StartPageController.getMusicPlayer().play();
+    StartPageController.getMainMusicPlayer().play();
 
     SceneManager.addUi(AppUi.LIGHT_ROOM, App.loadFxml("lightRoom"));
     SceneManager.addUi(AppUi.DARK_ROOM, App.loadFxml("darkRoom"));

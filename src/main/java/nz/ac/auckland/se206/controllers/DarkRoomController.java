@@ -24,9 +24,9 @@ import nz.ac.auckland.se206.speech.TextToSpeech;
 
 public class DarkRoomController {
 
+  private static Timeline timeline;
   private static final Integer START_TIME_MIN = 2;
   private static final Integer START_TIME_SEC = 00;
-  private static Timeline timeline;
 
   public static void playTimer() {
     timeline.play();

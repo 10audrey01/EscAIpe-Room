@@ -20,10 +20,10 @@ import nz.ac.auckland.se206.SceneManager.AppUi;
 
 public class LightRoomController {
 
+  private static Timeline timeline;
+  private static MediaPlayer vinylMediaPlayer;
   private static final Integer START_TIME_MIN = 2;
   private static final Integer START_TIME_SEC = 00;
-  private static MediaPlayer vinylMediaPlayer;
-  private static Timeline timeline;
 
   public static MediaPlayer getVinylMediaPlayer() {
     return vinylMediaPlayer;
@@ -142,13 +142,13 @@ public class LightRoomController {
           gameDialogueYesNo.setVisible(false);
           vinylMediaPlayer.stop();
           GameState.isVinylPlaying = false;
-          StartPageController.getMusicPlayer().play(); // if vinyl player is playing, stop it
+          StartPageController.getMainMusicPlayer().play(); // if vinyl player is playing, stop it
         } else {
           gameDialogueYesNo.setVisible(false);
           Media vinylSong =
               new Media(App.class.getResource("/sounds/vinylSong.mp3").toURI().toString());
           vinylMediaPlayer = new MediaPlayer(vinylSong);
-          StartPageController.getMusicPlayer().pause();
+          StartPageController.getMainMusicPlayer().pause();
           vinylMediaPlayer.play();
           GameState.isVinylPlaying = true; // if vinyl player is not playing, play it
           break;

@@ -16,10 +16,10 @@ import nz.ac.auckland.se206.SceneManager.AppUi;
 
 public class StartPageController {
 
-  private static MediaPlayer musicPlayer;
+  private static MediaPlayer mainMusicPlayer;
 
-  public static MediaPlayer getMusicPlayer() {
-    return musicPlayer;
+  public static MediaPlayer getMainMusicPlayer() {
+    return mainMusicPlayer;
   }
 
   @FXML private Button playButton;
@@ -29,14 +29,14 @@ public class StartPageController {
   @FXML
   public void initialize() throws URISyntaxException {
     Media mainMusic = new Media(App.class.getResource("/sounds/mainMusic.mp3").toURI().toString());
-    musicPlayer = new MediaPlayer(mainMusic);
-    musicPlayer.setOnEndOfMedia(
+    mainMusicPlayer = new MediaPlayer(mainMusic);
+    mainMusicPlayer.setOnEndOfMedia(
         new Runnable() {
           public void run() {
-            musicPlayer.seek(Duration.ZERO);
+            mainMusicPlayer.seek(Duration.ZERO);
           }
         });
-    musicPlayer.play();
+    mainMusicPlayer.play();
   }
 
   @FXML

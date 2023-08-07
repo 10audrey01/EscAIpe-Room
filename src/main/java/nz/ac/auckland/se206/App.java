@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import nz.ac.auckland.se206.SceneManager.AppUi;
+import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /**
  * This is the entry point of the JavaFX application, while you can change this class, it should
@@ -61,5 +62,10 @@ public class App extends Application {
     scene = new Scene(SceneManager.getUiRoot(AppUi.START_PAGE), 970, 790);
     stage.setScene(scene);
     stage.show();
+  }
+
+  @Override
+  public void stop() {
+    TextToSpeech.getSpeech().terminate();
   }
 }

@@ -8,11 +8,18 @@ import javax.speech.synthesis.SynthesizerModeDesc;
 
 /** Text-to-speech API using the JavaX speech library. */
 public class TextToSpeech {
+
   /** Custom unchecked exception for Text-to-speech issues. */
   static class TextToSpeechException extends RuntimeException {
     public TextToSpeechException(final String message) {
       super(message);
     }
+  }
+
+  private static final TextToSpeech textToSpeech = new TextToSpeech();
+
+  public static TextToSpeech getSpeech() {
+    return textToSpeech;
   }
 
   /**
@@ -25,8 +32,6 @@ public class TextToSpeech {
       throw new IllegalArgumentException(
           "You are not providing any arguments. You need to provide one or more sentences.");
     }
-
-    final TextToSpeech textToSpeech = new TextToSpeech();
 
     textToSpeech.speak(args);
     // textToSpeech.terminate();

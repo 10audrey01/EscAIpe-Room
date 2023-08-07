@@ -9,7 +9,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ChatController">
   <children>
-    <TextArea fx:id="chatTextArea" editable="false" layoutX="10.0" layoutY="14.0" prefHeight="593.0" prefWidth="938.0" wrapText="true">
+    <TextArea fx:id="chatTextArea" editable="false" layoutX="10.0" layoutY="130.0" prefHeight="477.0" prefWidth="938.0" wrapText="true">
          <font>
             <Font size="25.0" />
          </font></TextArea>
@@ -28,6 +28,16 @@
       <Label fx:id="chatDialogueLabel" layoutX="6.0" layoutY="702.0" prefHeight="73.0" prefWidth="950.0" style="-fx-background-color: #ffff;" text="Label">
          <font>
             <Font size="22.0" />
+         </font>
+      </Label>
+      <Label fx:id="timerMinLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="846.0" layoutY="48.0" prefHeight="45.0" prefWidth="26.0" style="-fx-background-color: #ffff;" text="2">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="timerSecLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="872.0" layoutY="48.0" prefHeight="45.0" prefWidth="62.0" style="-fx-background-color: #ffff;" text=": 00">
+         <font>
+            <Font size="30.0" />
          </font>
       </Label>
   </children>

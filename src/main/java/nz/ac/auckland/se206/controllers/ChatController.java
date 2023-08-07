@@ -2,8 +2,11 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -11,6 +14,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager.AppUi;
@@ -24,6 +28,19 @@ import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /** Controller class for the chat view. */
 public class ChatController {
+
+  private static final Integer START_TIME_MIN = 2;
+  private static final Integer START_TIME_SEC = 00;
+  private static Timeline timeline;
+
+  public static void playTimer() {
+    timeline.play();
+  }
+
+  public static void stopTimer() {
+    timeline.stop();
+  }
+
   @FXML private TextArea chatTextArea;
   @FXML private TextField inputText;
   @FXML private Label chatDialogueLabel;
@@ -33,6 +50,8 @@ public class ChatController {
   @FXML private Button goBackButton;
 
   private ChatCompletionRequest chatCompletionRequest;
+  private Integer timeMinutes = START_TIME_MIN;
+  private Integer timeSeconds = START_TIME_SEC;
 
   /**
    * Initializes the chat view, loading the riddle.
@@ -41,6 +60,7 @@ public class ChatController {
    */
   @FXML
   public void initialize() throws ApiProxyException {
+    startTimer();
 
     Task<Void> initializeRiddleTask =
         new Task<Void>() {
@@ -208,5 +228,42 @@ public class ChatController {
 
   public String getChatText() {
     return chatTextArea.getText();
+  }
+
+  public void startTimer() {
+    timerMinLabel.setText(timeMinutes.toString());
+    timerSecLabel.setText(": 00");
+    timeline = new Timeline(); // create a timeline for the timer
+    timeline.setCycleCount(Timeline.INDEFINITE);
+    timeline
+        .getKeyFrames()
+        .add(
+            new KeyFrame(
+                Duration.seconds(1), // handler is called every second
+                new EventHandler<ActionEvent>() {
+                  @Override
+                  public void handle(ActionEvent event) {
+                    timeSeconds--;
+                    if (timeSeconds < 0
+                        && timeMinutes > 0) { // decrement minutes if seconds reach 0
+                      timeMinutes--;
+                      timeSeconds = 59;
+                    }
+                    timerMinLabel.setText(timeMinutes.toString());
+                    if (timeSeconds < 10) {
+                      timerSecLabel.setText(": 0" + timeSeconds.toString()); // aesthetic purposes
+                    } else {
+                      timerSecLabel.setText(": " + timeSeconds.toString());
+                    }
+                    if (timeMinutes <= 0 && timeSeconds <= 0) {
+                      timeline.stop();
+                      try {
+                        App.setRoot("endPage"); // go to end page if time runs out
+                      } catch (IOException e) {
+                        e.printStackTrace();
+                      }
+                    }
+                  }
+                }));
   }
 }

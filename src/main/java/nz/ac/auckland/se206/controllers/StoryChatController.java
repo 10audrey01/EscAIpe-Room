@@ -77,6 +77,7 @@ public class StoryChatController {
 
     LightRoomController.playTimer();
     DarkRoomController.playTimer();
+    ChatController.playTimer();
   }
 
   /**

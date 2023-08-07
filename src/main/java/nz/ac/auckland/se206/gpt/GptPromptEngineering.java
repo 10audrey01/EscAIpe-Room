@@ -10,7 +10,7 @@ public class GptPromptEngineering {
    * @return the generated prompt engineering string
    */
   public static String getRiddleWithGivenWord(String wordToGuess) {
-    return "You are a talking book of an escape room, tell me a difficult riddle of at most 75"
+    return "You are a talking book of an escape room, tell me a difficult riddle of at most 100"
         + " words with answer "
         + wordToGuess
         + ". You should answer with the word Correct when is correct, if the user asks for hints"
@@ -29,8 +29,8 @@ public class GptPromptEngineering {
         + " the player, is asleep and stuck in their own bedroom - create your own scenario"
         + " as to how it happened. The player must solve a series of puzzles in under 2"
         + " minutes in order to escape their bedroom, or they will forever be trapped - do"
-        + " not tell they player what kind of puzzles there are. Inform the player of their"
-        + " situation, start your response with 'WAKE UP' and make your responses 100 words"
-        + " or shorter. Talk in second person perspective.";
+        + " not tell they player what kind of puzzles there are. Wake the player up and"
+        + " inform them of their situation, start your response with 'WAKE UP', say"
+        + " 'you are' instead of 'you find yourself' and make your response at most 100 words.";
   }
 }

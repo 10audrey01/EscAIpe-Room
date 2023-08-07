@@ -44,7 +44,7 @@ public class StoryChatController {
                 new ChatCompletionRequest()
                     .setN(1)
                     .setTemperature(1.2)
-                    .setTopP(0.8)
+                    .setTopP(1)
                     .setMaxTokens(200);
             runGpt(new ChatMessage("user", GptPromptEngineering.getStorylineAndInstructions()));
             return null;

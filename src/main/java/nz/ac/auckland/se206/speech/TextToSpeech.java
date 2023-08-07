@@ -99,7 +99,7 @@ public class TextToSpeech {
   /** Sleeps a while to add some pause between sentences. */
   private void sleep() {
     try {
-      Thread.sleep(30);
+      Thread.sleep(40);
     } catch (final InterruptedException e) {
       e.printStackTrace();
     }

@@ -80,12 +80,17 @@ public class StoryChatController {
           loadingLabel.setVisible(false);
           aiDialogue.setStyle("-fx-background-color: #ffff;");
           aiTextArea.setVisible(true);
-          aiOkButton.setVisible(true);
           // Stop sleeping music and play story
           sleepingPlayer.stop();
           StartPageController.getMainMusicPlayer().play();
           Thread textToSpeechThread = new Thread(textToSpeechTask, "textToSpeechThread");
           textToSpeechThread.start();
+        });
+
+    // Show ok button after text to speech is done
+    textToSpeechTask.setOnSucceeded(
+        e -> {
+          aiOkButton.setVisible(true);
         });
 
     Thread initializeStoryThread = new Thread(initializeStoryTask, "initializeStoryThread");

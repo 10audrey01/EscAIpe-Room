@@ -34,7 +34,6 @@ public class TextToSpeech {
     }
 
     textToSpeech.speak(args);
-    // textToSpeech.terminate();
   }
 
   private final Synthesizer synthesizer;

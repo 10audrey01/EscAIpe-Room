@@ -38,8 +38,10 @@ public class EndPageController {
       escapePlayer =
           new MediaPlayer(
               new Media(getClass().getResource("/sounds/escape.mp3").toURI().toString()));
+
       escapePlayer.setOnEndOfMedia( // Loop the music
           new Runnable() {
+
             public void run() {
               escapePlayer.seek(Duration.ZERO);
             }
@@ -50,8 +52,10 @@ public class EndPageController {
       escapeFailPlayer =
           new MediaPlayer(
               new Media(getClass().getResource("/sounds/escapeFail.mp3").toURI().toString()));
+
       escapeFailPlayer.setOnEndOfMedia( // Loop the music
           new Runnable() {
+
             public void run() {
               escapeFailPlayer.seek(Duration.ZERO);
             }
@@ -100,6 +104,8 @@ public class EndPageController {
 
     if (escapePlayer != null) {
       escapePlayer.stop();
+    } else if (escapeFailPlayer != null) {
+      escapeFailPlayer.stop();
     }
     App.setRoot("startPage");
   }

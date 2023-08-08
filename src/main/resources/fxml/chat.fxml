@@ -7,38 +7,54 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ChatController">
-  <children>
-    <TextArea fx:id="chatTextArea" editable="false" layoutX="10.0" layoutY="130.0" prefHeight="477.0" prefWidth="938.0" wrapText="true">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+   prefHeight="790.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/"
+   xmlns:fx="http://javafx.com/fxml/1"
+   fx:controller="nz.ac.auckland.se206.controllers.ChatController">
+   <children>
+      <TextArea fx:id="chatTextArea" editable="false" layoutX="10.0" layoutY="130.0"
+         prefHeight="477.0" prefWidth="938.0" wrapText="true">
          <font>
             <Font size="25.0" />
-         </font></TextArea>
-    <TextField fx:id="inputText" layoutX="11.0" layoutY="629.0" prefHeight="55.0" prefWidth="693.0">
+         </font>
+      </TextArea>
+      <TextField fx:id="inputText" layoutX="11.0" layoutY="629.0" prefHeight="55.0"
+         prefWidth="693.0">
          <font>
             <Font size="20.0" />
-         </font></TextField>
-    <Button fx:id="sendButton" layoutX="798.0" layoutY="607.0" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="35.0" prefWidth="80.0" text="Write">
+         </font>
+      </TextField>
+      <Button fx:id="sendButton" layoutX="798.0" layoutY="607.0" mnemonicParsing="false"
+         onAction="#onSendMessage" prefHeight="35.0" prefWidth="80.0" text="Write">
          <font>
             <Font size="20.0" />
-         </font></Button>
-    <Button fx:id="goBackButton" layoutX="757.0" layoutY="655.0" mnemonicParsing="false" onAction="#onGoBack" prefHeight="43.0" prefWidth="164.0" text="Close the book">
+         </font>
+      </Button>
+      <Button fx:id="goBackButton" layoutX="757.0" layoutY="655.0" mnemonicParsing="false"
+         onAction="#onGoBack" prefHeight="43.0" prefWidth="164.0" text="Close the book">
          <font>
             <Font size="20.0" />
-         </font></Button>
-      <Label fx:id="chatDialogueLabel" layoutX="6.0" layoutY="702.0" prefHeight="73.0" prefWidth="950.0" style="-fx-background-color: #ffff;" text="Label">
+         </font>
+      </Button>
+      <Label fx:id="chatDialogueLabel" layoutX="6.0" layoutY="702.0" prefHeight="73.0"
+         prefWidth="950.0" style="-fx-background-color: #ffff;" text="Label">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <Label fx:id="timerMinLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="846.0" layoutY="48.0" prefHeight="45.0" prefWidth="26.0" style="-fx-background-color: #ffff;" text="2">
+      <Label fx:id="timerMinLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="846.0"
+         layoutY="48.0" prefHeight="45.0" prefWidth="26.0" style="-fx-background-color: #ffff;"
+         text="2">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
-      <Label fx:id="timerSecLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="872.0" layoutY="48.0" prefHeight="45.0" prefWidth="62.0" style="-fx-background-color: #ffff;" text=": 00">
+      <Label fx:id="timerSecLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="872.0"
+         layoutY="48.0" prefHeight="45.0" prefWidth="62.0" style="-fx-background-color: #ffff;"
+         text=": 00">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
-  </children>
+   </children>
 </AnchorPane>

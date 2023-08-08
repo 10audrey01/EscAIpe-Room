@@ -39,6 +39,7 @@ public class DarkRoomController {
   @FXML private Rectangle riddleBook;
   @FXML private Rectangle window;
   @FXML private Rectangle vinyl;
+  @FXML private Rectangle door;
   @FXML private Pane gameDialogue;
   @FXML private Pane gameDialogueYesNo;
   @FXML private Label itemLabel;
@@ -56,6 +57,16 @@ public class DarkRoomController {
   @FXML
   private void initialize() {
     startTimer();
+  }
+
+  @FXML
+  private void onClickDoor() throws URISyntaxException {
+    itemLabel.setText("   The door is locked!");
+    MediaPlayer lockedDoorPlayer =
+        new MediaPlayer(
+            new Media(getClass().getResource("/sounds/doorLocked.mp3").toURI().toString()));
+    lockedDoorPlayer.play();
+    gameDialogue.setVisible(true);
   }
 
   @FXML

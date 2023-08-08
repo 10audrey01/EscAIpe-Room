@@ -11,6 +11,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.Glow;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -57,6 +58,9 @@ public class DarkRoomController {
   @FXML
   private void initialize() {
     startTimer();
+    Glow glow = new Glow();
+    glow.setLevel(1.0);
+    riddleBook.setEffect(glow);
   }
 
   @FXML

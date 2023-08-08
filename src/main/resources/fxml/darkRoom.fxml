@@ -8,77 +8,55 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-   prefHeight="790.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/"
-   xmlns:fx="http://javafx.com/fxml/1"
-   fx:controller="nz.ac.auckland.se206.controllers.DarkRoomController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.DarkRoomController">
    <children>
       <ImageView fitHeight="800.0" fitWidth="980.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/darkRoom.png" />
          </image>
       </ImageView>
-      <Pane fx:id="gameDialogueYesNo" layoutX="-3.0" layoutY="710.0" prefHeight="73.0"
-         prefWidth="974.0" style="-fx-background-color: #ffff;" visible="false">
+      <Pane fx:id="gameDialogueYesNo" layoutX="-3.0" layoutY="710.0" prefHeight="73.0" prefWidth="974.0" style="-fx-background-color: #ffff;" visible="false">
          <children>
-            <Label fx:id="itemLabelYesNo" layoutX="-3.0" layoutY="15.0" prefHeight="45.0"
-               prefWidth="886.0" text="   Label">
+            <Label fx:id="itemLabelYesNo" layoutX="-3.0" layoutY="15.0" prefHeight="45.0" prefWidth="886.0" text="   Label">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
-            <Button fx:id="yesButton" layoutX="910.0" layoutY="4.0" mnemonicParsing="false"
-               onAction="#onClickYes" prefWidth="44.0" text="YES">
+            <Button fx:id="yesButton" layoutX="910.0" layoutY="4.0" mnemonicParsing="false" onAction="#onClickYes" prefWidth="44.0" text="YES">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button fx:id="noButton" layoutX="910.0" layoutY="40.0" mnemonicParsing="false"
-               onAction="#onClickNo" prefWidth="44.0" text="NO">
+            <Button fx:id="noButton" layoutX="910.0" layoutY="40.0" mnemonicParsing="false" onAction="#onClickNo" prefWidth="44.0" text="NO">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
          </children>
       </Pane>
-      <Pane fx:id="gameDialogue" layoutX="-3.0" layoutY="710.0" prefHeight="73.0" prefWidth="974.0"
-         style="-fx-background-color: #ffff;" visible="false">
+      <Pane fx:id="gameDialogue" layoutX="-3.0" layoutY="710.0" prefHeight="73.0" prefWidth="974.0" style="-fx-background-color: #ffff;" visible="false">
          <children>
-            <Label fx:id="itemLabel" layoutX="-3.0" layoutY="15.0" prefHeight="45.0"
-               prefWidth="886.0" text="   Label">
+            <Label fx:id="itemLabel" layoutX="-3.0" layoutY="15.0" prefHeight="45.0" prefWidth="886.0" text="   Label">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
-            <Button fx:id="okButton" layoutX="919.0" layoutY="21.0" mnemonicParsing="false"
-               onAction="#onClickOk" text="OK" />
+            <Button fx:id="okButton" layoutX="919.0" layoutY="21.0" mnemonicParsing="false" onAction="#onClickOk" text="OK" />
          </children>
       </Pane>
-      <Rectangle fx:id="window" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="79.0"
-         layoutX="430.0" layoutY="62.0" onMouseReleased="#onClickWindow" opacity="0.0"
-         stroke="BLACK" strokeType="OUTSIDE" width="129.0" />
-      <Rectangle fx:id="vinyl" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="91.0"
-         layoutX="207.0" layoutY="413.0" onMouseReleased="#onClickVinyl" opacity="0.0"
-         stroke="BLACK" strokeType="INSIDE" width="84.0" />
-      <Rectangle fx:id="riddleBook" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="22.0"
-         layoutX="119.0" layoutY="239.0" onMouseReleased="#onClickBook" opacity="0.0" stroke="BLACK"
-         strokeType="OUTSIDE" width="9.0" />
-      <Label fx:id="timerSecLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="862.0"
-         layoutY="48.0" prefHeight="45.0" prefWidth="62.0" style="-fx-background-color: #ffff;"
-         text=": 00">
+      <Rectangle fx:id="window" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="79.0" layoutX="430.0" layoutY="62.0" onMouseReleased="#onClickWindow" opacity="0.0" stroke="BLACK" strokeType="OUTSIDE" width="129.0" />
+      <Rectangle fx:id="vinyl" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="91.0" layoutX="207.0" layoutY="413.0" onMouseReleased="#onClickVinyl" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="84.0" />
+      <Rectangle fx:id="riddleBook" arcHeight="5.0" arcWidth="5.0" fill="#52aac9" height="22.0" layoutX="119.0" layoutY="239.0" onMouseReleased="#onClickBook" opacity="0.6" stroke="BLACK" strokeType="OUTSIDE" width="9.0" />
+      <Label fx:id="timerSecLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="862.0" layoutY="48.0" prefHeight="45.0" prefWidth="62.0" style="-fx-background-color: #ffff;" text=": 00">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
-      <Label fx:id="timerMinLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="836.0"
-         layoutY="48.0" prefHeight="45.0" prefWidth="26.0" style="-fx-background-color: #ffff;"
-         text="2">
+      <Label fx:id="timerMinLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="836.0" layoutY="48.0" prefHeight="45.0" prefWidth="26.0" style="-fx-background-color: #ffff;" text="2">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
-      <Rectangle fx:id="door" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="73.0"
-         layoutX="452.0" layoutY="703.0" onMouseReleased="#onClickDoor" opacity="0.0" stroke="BLACK"
-         strokeType="INSIDE" width="85.0" />
+      <Rectangle fx:id="door" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="73.0" layoutX="452.0" layoutY="703.0" onMouseReleased="#onClickDoor" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="85.0" />
    </children>
 </Pane>

@@ -20,6 +20,11 @@ import nz.ac.auckland.se206.SceneManager.AppUi;
 
 public class LightRoomController {
 
+  private enum Item {
+    WINDOW,
+    VINYL_PLAYER
+  }
+
   private static Timeline timeline;
   private static MediaPlayer vinylMediaPlayer;
   private static final Integer START_TIME_MIN = 2;
@@ -52,11 +57,6 @@ public class LightRoomController {
   @FXML private Button yesButton;
   @FXML private Button noButton;
   @FXML private Button okButton;
-
-  private enum Item {
-    WINDOW,
-    VINYL_PLAYER
-  }
 
   private Integer timeMinutes = START_TIME_MIN;
   private Integer timeSeconds = START_TIME_SEC;

@@ -52,6 +52,7 @@ public class StartPageController {
 
     FXMLLoader chatLoader = new FXMLLoader(App.class.getResource("/fxml/chat.fxml"));
     SceneManager.addUi(AppUi.CHAT, chatLoader.load());
+    // Add controller for ChatController as reference for text to speech later
     SceneManager.addController(AppUi.CHAT, chatLoader.getController());
 
     App.setRoot("storyChat");

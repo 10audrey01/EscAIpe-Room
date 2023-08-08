@@ -27,16 +27,18 @@ public class EndPageController {
   public void initialize() throws URISyntaxException {
     StartPageController.getMainMusicPlayer().stop();
 
+    // Stop the vinyl player if it is playing
     if (LightRoomController.getVinylMediaPlayer() != null) {
       LightRoomController.getVinylMediaPlayer().stop();
     }
 
+    // Present user with different message and music depending on whether they escaped or not
     if (GameState.isEscaped) {
       endLabel.setText("You escaped!");
       escapePlayer =
           new MediaPlayer(
               new Media(getClass().getResource("/sounds/escape.mp3").toURI().toString()));
-      escapePlayer.setOnEndOfMedia(
+      escapePlayer.setOnEndOfMedia( // Loop the music
           new Runnable() {
             public void run() {
               escapePlayer.seek(Duration.ZERO);
@@ -48,7 +50,7 @@ public class EndPageController {
       escapeFailPlayer =
           new MediaPlayer(
               new Media(getClass().getResource("/sounds/escapeFail.mp3").toURI().toString()));
-      escapeFailPlayer.setOnEndOfMedia(
+      escapeFailPlayer.setOnEndOfMedia( // Loop the music
           new Runnable() {
             public void run() {
               escapeFailPlayer.seek(Duration.ZERO);
@@ -57,6 +59,7 @@ public class EndPageController {
       escapeFailPlayer.play();
     }
 
+    // Stop all timers to allow replayability
     LightRoomController.stopTimer();
     DarkRoomController.stopTimer();
     ChatController.stopTimer();

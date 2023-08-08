@@ -33,6 +33,11 @@ public class StoryChatController {
 
   private ChatCompletionRequest chatCompletionRequest;
 
+  /**
+   * Initializes the story chat view, loading the storyline.
+   *
+   * @throws ApiProxyException if there is an error communicating with the API proxy
+   */
   @FXML
   public void initialize() {
 
@@ -40,6 +45,7 @@ public class StoryChatController {
         new Task<Void>() {
           @Override
           protected Void call() throws Exception {
+            // Edit AI behaviour here (temperature, topP, maxTokens)
             chatCompletionRequest =
                 new ChatCompletionRequest()
                     .setN(1)
@@ -51,6 +57,7 @@ public class StoryChatController {
           }
         };
 
+    // Task to convert text to speech
     Task<Void> textToSpeechTask =
         new Task<Void>() {
           @Override
@@ -60,6 +67,7 @@ public class StoryChatController {
           }
         };
 
+    // Play sleeping music while story is loading and inform user that story is loading
     MediaPlayer sleepingPlayer =
         new MediaPlayer(
             new Media(new File("src/main/resources/sounds/sleeping.mp3").toURI().toString()));
@@ -68,10 +76,12 @@ public class StoryChatController {
 
     initializeStoryTask.setOnSucceeded(
         e -> {
+          // Hide loading label and show story
           loadingLabel.setVisible(false);
           aiDialogue.setStyle("-fx-background-color: #ffff;");
           aiTextArea.setVisible(true);
           aiOkButton.setVisible(true);
+          // Stop sleeping music and play story
           sleepingPlayer.stop();
           StartPageController.getMainMusicPlayer().play();
           Thread textToSpeechThread = new Thread(textToSpeechTask, "textToSpeechThread");

@@ -60,6 +60,8 @@ public class DarkRoomController {
 
   @FXML
   private void onClickBook() throws IOException, URISyntaxException {
+
+    // Open book and play sound if riddle is not solved
     if (!GameState.isRiddleResolved) {
       MediaPlayer bookOpeningPlayer =
           new MediaPlayer(
@@ -68,6 +70,7 @@ public class DarkRoomController {
 
       App.setUi(AppUi.CHAT);
 
+      // Task gets current text from chat and sends it to text to speech
       Task<Void> textToSpeechTask =
           new Task<Void>() {
             @Override
@@ -80,11 +83,13 @@ public class DarkRoomController {
             }
           };
 
+      // Only do text to speech once
       if (hasBookSpoken.compareAndSet(false, true)) {
         Thread textToSpeechThread = new Thread(textToSpeechTask, "textToSpeechThread");
         textToSpeechThread.start();
       }
 
+      // Riddle view not available if riddle is solved, so show dialogue
     } else if (GameState.isRiddleResolved) {
       itemLabel.setText("   You already solved the riddle! The answer was 'vinyl'.");
       gameDialogue.setVisible(true);

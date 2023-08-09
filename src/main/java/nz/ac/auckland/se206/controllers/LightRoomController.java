@@ -4,11 +4,13 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -17,6 +19,12 @@ import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager.AppUi;
+import nz.ac.auckland.se206.gpt.ChatMessage;
+import nz.ac.auckland.se206.gpt.GptPromptEngineering;
+import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
+import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
+import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
+import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 
 public class LightRoomController {
 
@@ -50,8 +58,8 @@ public class LightRoomController {
   @FXML private Pane gameDialogue;
   @FXML private Pane gameDialogueYesNo;
 
-  @FXML private Label itemLabel;
-  @FXML private Label itemLabelYesNo;
+  @FXML private TextArea itemTextArea;
+  @FXML private TextArea itemTextAreaYesNo;
   @FXML private Label timerMinLabel;
   @FXML private Label timerSecLabel;
   @FXML private Button yesButton;
@@ -61,10 +69,75 @@ public class LightRoomController {
   private Integer timeMinutes = START_TIME_MIN;
   private Integer timeSeconds = START_TIME_SEC;
   private Item currentItem;
+  private ChatCompletionRequest chatCompletionRequest;
+  private ChatMessage doorLockedInteraction;
+  private ChatMessage drawBlindsInteraction;
+  private ChatMessage vinylCollectInteraction;
+  private ChatMessage playVinylInteraction;
+  private ChatMessage stopVinylInteraction;
+  private ChatMessage foundKeyInteraction;
 
   @FXML
   public void initialize() {
     startTimer();
+
+    Task<Void> interactionsTask =
+        new Task<Void>() {
+
+          @Override
+          protected Void call() throws Exception {
+
+            // Edit AI behaviour here (temperature, topP, maxTokens)
+            chatCompletionRequest =
+                new ChatCompletionRequest()
+                    .setN(1)
+                    .setTemperature(1.2)
+                    .setTopP(0.8)
+                    .setMaxTokens(30);
+            doorLockedInteraction =
+                runGpt(
+                    new ChatMessage(
+                        "user", GptPromptEngineering.getInteraction("the door is locked")));
+
+            drawBlindsInteraction =
+                runGpt(
+                    new ChatMessage(
+                        "user",
+                        GptPromptEngineering.getInteraction(
+                            "if they want to draw the blinds, maybe they will see something"
+                                + " different")));
+            vinylCollectInteraction =
+                runGpt(
+                    new ChatMessage(
+                        "user",
+                        GptPromptEngineering.getInteraction(
+                            "they collected a vinyl, maybe playing it will help them escape")));
+            playVinylInteraction =
+                runGpt(
+                    new ChatMessage(
+                        "user",
+                        GptPromptEngineering.getInteraction(
+                            "if they want to play the vinyl they found")));
+            stopVinylInteraction =
+                runGpt(
+                    new ChatMessage(
+                        "user",
+                        GptPromptEngineering.getInteraction(
+                            "if they want to stop playing the vinyl, even though the music is"
+                                + " nice")));
+
+            foundKeyInteraction =
+                runGpt(
+                    new ChatMessage(
+                        "user",
+                        GptPromptEngineering.getInteraction("they found a key in the guitar")));
+
+            return null;
+          }
+        };
+
+    Thread interactionsThread = new Thread(interactionsTask);
+    interactionsThread.start();
   }
 
   @FXML
@@ -77,7 +150,8 @@ public class LightRoomController {
       doorOpenPlayer.play();
       App.setRoot("endPage");
     } else {
-      itemLabel.setText("   The door is locked!");
+      // itemLabel.setText("   The door is locked!");
+      appendChatMessage(doorLockedInteraction, false);
       MediaPlayer lockedDoorPlayer =
           new MediaPlayer(
               new Media(getClass().getResource("/sounds/doorLocked.mp3").toURI().toString()));
@@ -89,14 +163,18 @@ public class LightRoomController {
   @FXML
   private void onClickWindow() {
     currentItem = Item.WINDOW;
-    itemLabelYesNo.setText("   Draw the blinds? Maybe you will see something different . . .");
+    // itemLabelYesNo.setText("   Draw the blinds? Maybe you will see something different . . .");
+    appendChatMessage(drawBlindsInteraction, true);
+    yesButton.setText("Draw blinds");
+    noButton.setText("Go back");
     gameDialogueYesNo.setVisible(true);
   }
 
   @FXML
   private void onClickVinyl() {
     if (GameState.isRiddleResolved && !GameState.isVinylFound) {
-      itemLabel.setText("   You collected a vinyl!");
+      // itemLabel.setText("   You collected a vinyl!");
+      appendChatMessage(vinylCollectInteraction, false);
       GameState.isVinylFound = true;
       gameDialogue.setVisible(true);
     }
@@ -106,21 +184,27 @@ public class LightRoomController {
   private void onClickVinylPlayer() {
     if (GameState.isVinylFound) {
       currentItem = Item.VINYL_PLAYER;
-      itemLabelYesNo.setText("   Play the vinyl?");
+      appendChatMessage(playVinylInteraction, true);
+      yesButton.setText("Play");
+      noButton.setText("Go back");
       gameDialogueYesNo.setVisible(true);
+    }
 
-      if (GameState.isVinylPlaying) {
-        currentItem = Item.VINYL_PLAYER;
-        itemLabelYesNo.setText("   Stop the vinyl player?");
-        gameDialogueYesNo.setVisible(true);
-      }
+    if (GameState.isVinylPlaying) {
+      currentItem = Item.VINYL_PLAYER;
+      // itemLabelYesNo.setText("   Stop the vinyl player?");
+      appendChatMessage(stopVinylInteraction, true);
+      yesButton.setText("Stop");
+      noButton.setText("Go back");
+      gameDialogueYesNo.setVisible(true);
     }
   }
 
   @FXML
   private void onClickGuitar() {
     if (GameState.isVinylPlaying) {
-      itemLabel.setText("   You found a key!");
+      // itemTextArea.setText("   You found a key!");
+      appendChatMessage(foundKeyInteraction, false);
       gameDialogue.setVisible(true);
       GameState.isKeyFound = true;
     }
@@ -201,5 +285,36 @@ public class LightRoomController {
                     }
                   }
                 }));
+  }
+
+  /**
+   * Runs the GPT model with a given chat message.
+   *
+   * @param msg the chat message to process
+   * @return the response chat message
+   * @throws ApiProxyException if there is an error communicating with the API proxy
+   * @throws InterruptedException
+   */
+  public ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
+    chatCompletionRequest.addMessage(msg);
+
+    try {
+      ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
+      Choice result = chatCompletionResult.getChoices().iterator().next();
+      chatCompletionRequest.addMessage(result.getChatMessage());
+      return result.getChatMessage();
+    } catch (ApiProxyException e) {
+      // TODO handle exception appropriately
+      e.printStackTrace();
+      return null;
+    }
+  }
+
+  private void appendChatMessage(ChatMessage msg, boolean isYesOrNo) {
+    if (isYesOrNo) {
+      itemTextAreaYesNo.setText("Game Master: " + msg.getContent());
+    } else {
+      itemTextArea.setText("Game Master: " + msg.getContent());
+    }
   }
 }

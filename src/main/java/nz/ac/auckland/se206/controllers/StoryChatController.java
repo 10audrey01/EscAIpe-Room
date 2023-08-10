@@ -108,6 +108,7 @@ public class StoryChatController {
           StartPageController.getMainMusicPlayer().play();
           Thread textToSpeechThread = new Thread(textToSpeechTask, "textToSpeechThread");
           textToSpeechThread.start();
+          // Start timer
           playTimer();
           LightRoomController.playTimer();
           DarkRoomController.playTimer();

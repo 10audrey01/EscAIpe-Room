@@ -87,21 +87,23 @@ public class DarkRoomController {
                     .setTemperature(1.2)
                     .setTopP(0.4)
                     .setMaxTokens(30);
+            // Prompts GPT to generate a response about the door being locked
             doorLockedInteraction =
                 runGpt(
                     new ChatMessage(
                         "user", GptPromptEngineering.getInteraction("the door is locked")));
-            openBlindsInteraction =
+            openBlindsInteraction = // Prompts GPT to generate a response about opening the blinds
                 runGpt(
                     new ChatMessage(
                         "user",
                         GptPromptEngineering.getInteraction("if they want to open the blinds")));
-            bookAfterRiddleSolvedInteraction =
+            bookAfterRiddleSolvedInteraction = // Prompts GPT to generate a response about the book
                 runGpt(
                     new ChatMessage(
                         "user",
                         GptPromptEngineering.getInteraction(
                             "they already solved the riddle and answer was 'vinyl'")));
+            // Prompts GPT to generate a response about collecting the vinyl in the dark
             collectVinylInteraction =
                 runGpt(
                     new ChatMessage(
@@ -265,9 +267,9 @@ public class DarkRoomController {
 
   private void appendChatMessage(ChatMessage msg, boolean isYesOrNo) {
     if (isYesOrNo) {
-      itemTextAreaYesNo.setText("Game Master: " + msg.getContent());
+      itemTextAreaYesNo.setText("Voice: " + msg.getContent());
     } else {
-      itemTextArea.setText("Game Master: " + msg.getContent());
+      itemTextArea.setText("Voice: " + msg.getContent());
     }
   }
 }

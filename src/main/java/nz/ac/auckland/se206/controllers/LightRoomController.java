@@ -94,39 +94,40 @@ public class LightRoomController {
                     .setTemperature(1.2)
                     .setTopP(0.4)
                     .setMaxTokens(30);
+            // Prompts GPT to generate a response about the door being locked
             doorLockedInteraction =
                 runGpt(
                     new ChatMessage(
                         "user", GptPromptEngineering.getInteraction("the door is locked")));
 
-            drawBlindsInteraction =
+            drawBlindsInteraction = // Prompts GPT to generate a response about drawing the blinds
                 runGpt(
                     new ChatMessage(
                         "user",
                         GptPromptEngineering.getInteraction(
                             "if they want to draw the blinds, maybe they will see something"
                                 + " different")));
-            vinylCollectInteraction =
+            vinylCollectInteraction = // Prompts GPT to generate a response about collecting the
+                // vinyl
                 runGpt(
                     new ChatMessage(
                         "user",
                         GptPromptEngineering.getInteraction(
                             "they collected a vinyl, maybe playing it will help them escape")));
-            playVinylInteraction =
+            playVinylInteraction = // Prompts GPT to generate a response about playing the vinyl
                 runGpt(
                     new ChatMessage(
                         "user",
                         GptPromptEngineering.getInteraction(
                             "if they want to play the vinyl they found")));
-            stopVinylInteraction =
+            stopVinylInteraction = // Prompts GPT to generate a response about stopping the vinyl
                 runGpt(
                     new ChatMessage(
                         "user",
                         GptPromptEngineering.getInteraction(
                             "if they want to stop playing the vinyl, even though the music is"
                                 + " nice")));
-
-            foundKeyInteraction =
+            foundKeyInteraction = // Prompts GPT to generate a response about finding the key
                 runGpt(
                     new ChatMessage(
                         "user",
@@ -312,9 +313,9 @@ public class LightRoomController {
 
   private void appendChatMessage(ChatMessage msg, boolean isYesOrNo) {
     if (isYesOrNo) {
-      itemTextAreaYesNo.setText("Game Master: " + msg.getContent());
+      itemTextAreaYesNo.setText("Voice: " + msg.getContent());
     } else {
-      itemTextArea.setText("Game Master: " + msg.getContent());
+      itemTextArea.setText("Voice: " + msg.getContent());
     }
   }
 }

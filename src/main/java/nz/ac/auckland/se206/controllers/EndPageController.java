@@ -67,6 +67,7 @@ public class EndPageController {
     LightRoomController.stopTimer();
     DarkRoomController.stopTimer();
     ChatController.stopTimer();
+    StoryChatController.stopTimer();
   }
 
   @FXML

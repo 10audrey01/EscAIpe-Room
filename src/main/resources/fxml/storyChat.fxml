@@ -7,39 +7,41 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="aiDialogue" prefHeight="790.0" prefWidth="960.0" style="-fx-background-color: #000000;"
-   xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1"
-   fx:controller="nz.ac.auckland.se206.controllers.StoryChatController">
+<Pane fx:id="aiDialogue" prefHeight="790.0" prefWidth="960.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.StoryChatController">
    <children>
-      <TextField fx:id="userTextField" layoutX="14.0" layoutY="721.0" prefHeight="55.0"
-         prefWidth="693.0" visible="false">
+      <TextField fx:id="userTextField" layoutX="14.0" layoutY="721.0" prefHeight="55.0" prefWidth="693.0" visible="false">
          <font>
             <Font size="25.0" />
          </font>
       </TextField>
-      <Button fx:id="talkButton" layoutX="748.0" layoutY="727.0" mnemonicParsing="false"
-         onAction="#onClickTalk" prefHeight="44.0" prefWidth="85.0" text="Talk" visible="false">
+      <Button fx:id="talkButton" layoutX="748.0" layoutY="727.0" mnemonicParsing="false" onAction="#onClickTalk" prefHeight="44.0" prefWidth="85.0" text="Talk" visible="false">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <TextArea fx:id="aiTextArea" editable="false" layoutX="10.0" layoutY="14.0" prefHeight="696.0"
-         prefWidth="938.0" visible="false" wrapText="true">
+      <TextArea fx:id="aiTextArea" editable="false" layoutX="10.0" layoutY="123.0" prefHeight="654.0" prefWidth="938.0" visible="false" wrapText="true">
          <font>
             <Font size="25.0" />
          </font>
       </TextArea>
-      <Button fx:id="aiOkButton" layoutX="874.0" layoutY="727.0" mnemonicParsing="false"
-         onAction="#onClickAiOk" prefHeight="44.0" prefWidth="62.0" text="OK" visible="false">
+      <Button fx:id="aiOkButton" layoutX="874.0" layoutY="727.0" mnemonicParsing="false" onAction="#onClickAiOk" prefHeight="44.0" prefWidth="62.0" text="OK" visible="false">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Label fx:id="loadingLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="4.0"
-         layoutY="303.0" prefHeight="21.0" prefWidth="960.0" style="-fx-text-fill: #ffff;"
-         text="Sleeping peacefully . . ." textAlignment="CENTER">
+      <Label fx:id="loadingLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="303.0" prefHeight="21.0" prefWidth="960.0" style="-fx-text-fill: #ffff;" text="Sleeping peacefully . . ." textAlignment="CENTER">
          <font>
             <Font size="36.0" />
+         </font>
+      </Label>
+      <Label fx:id="timerMinLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="846.0" layoutY="48.0" prefHeight="45.0" prefWidth="26.0" style="-fx-background-color: #ffff;" text="2" visible="false">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="timerSecLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="872.0" layoutY="48.0" prefHeight="45.0" prefWidth="62.0" style="-fx-background-color: #ffff;" text=": 00" visible="false">
+         <font>
+            <Font size="30.0" />
          </font>
       </Label>
    </children>

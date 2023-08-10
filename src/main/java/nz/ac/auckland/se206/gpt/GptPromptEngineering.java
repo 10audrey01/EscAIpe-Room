@@ -26,12 +26,13 @@ public class GptPromptEngineering {
 
   public static String getStorylineAndInstructions() {
     return "You are the mysterious Game Master of an escape room, where the unnamed protagonist,"
-        + " the player, is asleep and stuck in their own bedroom - create your own scenario"
-        + " as to how it happened. The player must solve a series of puzzles in under 2"
-        + " minutes in order to escape their bedroom, or they will forever be trapped - do"
-        + " not tell they player what kind of puzzles there are. Wake the player up and"
-        + " inform them of their situation, start your response with 'WAKE UP', say"
-        + " 'you are' instead of 'you find yourself' and make your response at most 70 words.";
+               + " the player, is asleep and stuck in their own bedroom - create your own scenario"
+               + " as to how it happened. The player must solve a series of puzzles in under 2"
+               + " minutes in order to escape their bedroom by clicking on various items, or they"
+               + " will forever be trapped - do not tell they player what kind of puzzles there"
+               + " are. Wake the player up and inform them of their situation, start your response"
+               + " with 'WAKE UP!', say 'you are' instead of 'you find yourself' and make your"
+               + " response at most 70 words.";
   }
 
   public static String getInteraction(String interaction) {

@@ -43,7 +43,6 @@ public class ChatController {
 
   @FXML private TextArea chatTextArea;
   @FXML private TextField inputText;
-  @FXML private Label chatDialogueLabel;
   @FXML private Label timerMinLabel;
   @FXML private Label timerSecLabel;
   @FXML private Button sendButton;
@@ -79,17 +78,6 @@ public class ChatController {
             return null;
           }
         };
-
-    initializeRiddleTask.setOnRunning(
-        e -> {
-          chatDialogueLabel.setText(
-              "Flipping through the pages . . ."); // let user know riddle is loading
-        });
-
-    initializeRiddleTask.setOnSucceeded(
-        e -> {
-          chatDialogueLabel.setText("You found a riddle!"); // let user know riddle is loaded
-        });
 
     Thread initializeRiddleThread = new Thread(initializeRiddleTask, "initializeRiddleThread");
     initializeRiddleThread.start();
@@ -141,8 +129,6 @@ public class ChatController {
    */
   @FXML
   private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
-    // let user know checking if there answer is right
-    chatDialogueLabel.setText("The book is reading what you wrote . . .");
     String message = inputText.getText();
     sendButton.setDisable(true); // disable send button while processing message
 
@@ -187,13 +173,6 @@ public class ChatController {
     onSendMessageTask.setOnSucceeded(
         e -> {
           sendButton.setDisable(false);
-
-          if (GameState.isRiddleResolved) {
-            chatDialogueLabel.setText("You solved the riddle!"); // riddle is solved
-          } else {
-            chatDialogueLabel.setText(
-                "Think about it more . . ."); // riddle is not solved, try again
-          }
         });
 
     onSendMessageTask.setOnFailed(

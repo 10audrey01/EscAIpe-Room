@@ -85,7 +85,7 @@ public class DarkRoomController {
                 new ChatCompletionRequest()
                     .setN(1)
                     .setTemperature(1.2)
-                    .setTopP(0.8)
+                    .setTopP(0.4)
                     .setMaxTokens(30);
             doorLockedInteraction =
                 runGpt(

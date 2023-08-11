@@ -120,7 +120,8 @@ public class DarkRoomController {
 
   @FXML
   private void onClickDoor() throws URISyntaxException {
-    // itemLabel.setText("   The door is locked!");
+    door.setDisable(true);
+    gameDialogueYesNo.setVisible(false);
     appendChatMessage(doorLockedInteraction, false);
     MediaPlayer lockedDoorPlayer =
         new MediaPlayer(
@@ -163,6 +164,8 @@ public class DarkRoomController {
       // Riddle view not available if riddle is solved, so show dialogue
     } else if (GameState.isRiddleResolved) {
       // itemLabel.setText("   You already solved the riddle! The answer was 'vinyl'.");
+      door.setDisable(true);
+      gameDialogueYesNo.setVisible(false);
       appendChatMessage(bookAfterRiddleSolvedInteraction, false);
       gameDialogue.setVisible(true);
     }
@@ -170,7 +173,8 @@ public class DarkRoomController {
 
   @FXML
   private void onClickWindow() {
-    // itemLabelYesNo.setText("   Open the blinds?");
+    door.setDisable(true);
+    gameDialogue.setVisible(false);
     appendChatMessage(openBlindsInteraction, true);
     yesButton.setText("Open blinds");
     noButton.setText("Go back");
@@ -179,8 +183,10 @@ public class DarkRoomController {
 
   @FXML
   private void onClickVinyl() {
+    door.setDisable(true);
     if (GameState.isRiddleResolved) {
       // itemLabel.setText("   You can't see where the vinyl is . . .");
+      gameDialogueYesNo.setVisible(false);
       appendChatMessage(collectVinylInteraction, false);
       gameDialogue.setVisible(true);
     }
@@ -188,6 +194,7 @@ public class DarkRoomController {
 
   @FXML
   private void onClickYes() throws IOException, URISyntaxException {
+    door.setDisable(false);
     gameDialogueYesNo.setVisible(false);
     MediaPlayer blindsPlayer =
         new MediaPlayer(new Media(getClass().getResource("/sounds/blinds.mp3").toURI().toString()));
@@ -197,11 +204,13 @@ public class DarkRoomController {
 
   @FXML
   private void onClickNo() {
+    door.setDisable(false);
     gameDialogueYesNo.setVisible(false);
   }
 
   @FXML
   private void onClickOk() {
+    door.setDisable(false);
     gameDialogue.setVisible(false);
   }
 

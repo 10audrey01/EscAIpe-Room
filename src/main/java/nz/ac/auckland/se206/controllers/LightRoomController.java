@@ -143,6 +143,7 @@ public class LightRoomController {
 
   @FXML
   private void onClickDoor() throws IOException, URISyntaxException {
+    door.setDisable(true);
     if (GameState.isKeyFound) {
       GameState.isEscaped = true;
       MediaPlayer doorOpenPlayer =
@@ -151,7 +152,7 @@ public class LightRoomController {
       doorOpenPlayer.play();
       App.setRoot("endPage");
     } else {
-      // itemLabel.setText("   The door is locked!");
+      gameDialogueYesNo.setVisible(false);
       appendChatMessage(doorLockedInteraction, false);
       MediaPlayer lockedDoorPlayer =
           new MediaPlayer(
@@ -163,8 +164,9 @@ public class LightRoomController {
 
   @FXML
   private void onClickWindow() {
+    door.setDisable(true);
     currentItem = Item.WINDOW;
-    // itemLabelYesNo.setText("   Draw the blinds? Maybe you will see something different . . .");
+    gameDialogue.setVisible(false);
     appendChatMessage(drawBlindsInteraction, true);
     yesButton.setText("Draw blinds");
     noButton.setText("Go back");
@@ -173,8 +175,9 @@ public class LightRoomController {
 
   @FXML
   private void onClickVinyl() {
+    door.setDisable(true);
     if (GameState.isRiddleResolved && !GameState.isVinylFound) {
-      // itemLabel.setText("   You collected a vinyl!");
+      gameDialogueYesNo.setVisible(false);
       appendChatMessage(vinylCollectInteraction, false);
       GameState.isVinylFound = true;
       gameDialogue.setVisible(true);
@@ -183,7 +186,10 @@ public class LightRoomController {
 
   @FXML
   private void onClickVinylPlayer() {
+    door.setDisable(true);
+    // Prompt user to play the vinyl
     if (GameState.isVinylFound) {
+      gameDialogue.setVisible(false);
       currentItem = Item.VINYL_PLAYER;
       appendChatMessage(playVinylInteraction, true);
       yesButton.setText("Play");
@@ -191,9 +197,10 @@ public class LightRoomController {
       gameDialogueYesNo.setVisible(true);
     }
 
+    // If the vinyl is already playing, prompt the user to stop it
     if (GameState.isVinylPlaying) {
       currentItem = Item.VINYL_PLAYER;
-      // itemLabelYesNo.setText("   Stop the vinyl player?");
+      gameDialogue.setVisible(false);
       appendChatMessage(stopVinylInteraction, true);
       yesButton.setText("Stop");
       noButton.setText("Go back");
@@ -203,8 +210,10 @@ public class LightRoomController {
 
   @FXML
   private void onClickGuitar() {
+    door.setDisable(true);
     if (GameState.isVinylPlaying) {
       // itemTextArea.setText("   You found a key!");
+      gameDialogueYesNo.setVisible(false);
       appendChatMessage(foundKeyInteraction, false);
       gameDialogue.setVisible(true);
       GameState.isKeyFound = true;
@@ -239,16 +248,19 @@ public class LightRoomController {
           break;
         }
     }
+    door.setDisable(false);
   }
 
   @FXML
   private void onClickNo() {
     gameDialogueYesNo.setVisible(false);
+    door.setDisable(false);
   }
 
   @FXML
   private void onClickOk() {
     gameDialogue.setVisible(false);
+    door.setDisable(false);
   }
 
   public void startTimer() {

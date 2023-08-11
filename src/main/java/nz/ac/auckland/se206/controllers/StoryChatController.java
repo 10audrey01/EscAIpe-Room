@@ -99,6 +99,7 @@ public class StoryChatController {
         e -> {
           // Hide loading label and show story
           loadingLabel.setVisible(false);
+          aiOkButton.setVisible(true);
           aiDialogue.setStyle("-fx-background-color: #ffff;");
           aiTextArea.setVisible(true);
           timerMinLabel.setVisible(true);
@@ -113,12 +114,6 @@ public class StoryChatController {
           LightRoomController.playTimer();
           DarkRoomController.playTimer();
           ChatController.playTimer();
-        });
-
-    // Show ok button after text to speech is done
-    textToSpeechTask.setOnSucceeded(
-        e -> {
-          aiOkButton.setVisible(true);
         });
 
     Thread initializeStoryThread = new Thread(initializeStoryTask, "initializeStoryThread");

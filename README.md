@@ -1,6 +1,6 @@
 Project Overview
 
-Welcome to the Escape Room Game project! This interactive game combines the power of JavaFX for a captivating graphical user interface (GUI) and integrates cutting-edge AI technology, specifically OpenAI's GPT model, to enhance the player experience and puzzle dynamics. Get ready to explore a world of mystery and challenge!
+Welcome to the Alpha Escape Room Game project! This interactive game combines the power of JavaFX for a captivating graphical user interface (GUI) and integrates cutting-edge AI technology, specifically OpenAI's GPT model, to enhance the player experience and puzzle dynamics. Get ready to explore a world of mystery and challenge!
 
 Features
 Immersive Environment: Immerse yourself in a Escape Room setting, brought to life with JavaFX's intuitive graphics and interactive components.
